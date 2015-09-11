@@ -11,3 +11,5 @@ less
 nemo64:bootstrap
 iron:router
 msavin:mongol
+accounts-ui
+accounts-password
