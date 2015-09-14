@@ -2,13 +2,28 @@
 @import "G:\S\Projects\Meteor\taskFlow\client\stylesheets\vendor\custom.bootstrap.import.less";
 
 .basic-column {
-    padding-top: 25px;
-    padding-left: 25px;
-    .make-lg-column(4);
+    background-color: #b0c4de;
+    margin: auto;
+    height:10vh;
+    text-align:center;
+    .make-lg-column(4,2);
+}
+
+.small-column {
+    margin: auto;
+    height:90vh;
+    background-color: #b9e6df;
+    padding-top: 5px;
+    padding-left: 5px;
+    .make-md-column(1);
+    text-align:center;
 }
 
 .large-column {
-    padding-top: 25px;
-    padding-left: 25px;
-    .make-lg-column(12);
+    margin: auto;
+    height:90vh;
+    .make-md-column(10);
+}
+.rowzzz {
+	.make-row();
 }

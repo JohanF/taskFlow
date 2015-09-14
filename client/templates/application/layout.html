@@ -1,17 +1,25 @@
 <template name="layout">
    <div class="container-fluid">
-	<div class="row">
-		<div class="basic-column">
+	<div class="rowzzz">
+		<div class="basic-column"><h1>1</h1>
 	    </div>
-	    <div class="basic-column">     
-	      {{> header}}   
+	    <div class="basic-column"> 
+	    <br><br>    
+	      {{> header}}  
+
 	    </div>
-	    <div class="basic-column">  	
+	    <div class="basic-column"><h1>3</h1>  	
 	    </div>
     </div>
+    </div>
 
+   <div class="container-fluid">
     <div id="main">
 
+
+	<div class="rowzzz">
+	   <div class="small-column"> <h1>1</h1>
+	   	</div>
 	    <div class="large-column">  	
 	    	{{#if currentUser}}
 			  {{> signedin}} 
@@ -19,6 +27,7 @@
 			  {{> notsignedin}} 
 			{{/if}}
 	    </div>
+    </div>
 
     </div>
   </div>
