@@ -13,9 +13,11 @@
     <div id="main">
 
 	    <div class="large-column">  	
-	    	<h1> 	
-	    		Please login!
-	    	</h1>
+	    	{{#if currentUser}}
+			  {{> signedin}} 
+			{{else}}
+			  {{> notsignedin}} 
+			{{/if}}
 	    </div>
 
     </div>
