@@ -27,11 +27,7 @@
 <h1>1</h1>
 	   	</div>
 	    <div class="large-column">  	
-	    	{{#if currentUser}}
-			  {{> signedin}} 
-			{{else}}
-			  {{> notsignedin}} 
-			{{/if}}
+	    	{{> yield}}
 	    </div>
     </div>
 
