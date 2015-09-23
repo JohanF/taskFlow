@@ -1,0 +1,30 @@
+<template name="welcomeScreen">
+	<div class="container">
+		<h1> 
+			{{>notLoggedIn}}
+			{{>loggedIn}}
+		</h1>
+	</div>
+</template>
+
+<template name="notLoggedIn"> 
+    <div id="notLoggedInText" style="text-align: center; hide=true;">
+        <h3>Welcome to TaskFlow</h3>
+        <p>Log in to get the flow going</p>
+    </div>
+</template>
+
+<template name="loggedIn"> 
+    <div id="loggedInText" style="text-align: center; hide=true;">
+        <h3>Welcome back dear user</h3>
+        <p>Here is an overview of your projects: </p>
+        <div class ="projectCards .col-md-4" >
+
+		<p>myName1</p>	
+		<p>myName2</p>	
+		<p>myName3</p>	
+
+  
+		</div>
+    </div>
+</template>
