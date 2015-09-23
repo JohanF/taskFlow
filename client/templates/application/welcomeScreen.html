@@ -18,13 +18,17 @@
     <div id="loggedInText" style="text-align: center; hide=true;">
         <h3>Welcome back dear user</h3>
         <p>Here is an overview of your projects: </p>
-        <div class ="projectCards .col-md-4" >
-
-		<p>myName1</p>	
-		<p>myName2</p>	
-		<p>myName3</p>	
-
-  
-		</div>
+        
     </div>
+    <div id="projectList" style="text-align: center; hide=true;"> 
+    	{{>projectCard}}
+    	{{>projectCard}}
+    </div>
+
+</template>
+
+<template name="projectCard">
+	<h3>
+		ProjectName
+	</h3>
 </template>
