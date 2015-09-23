@@ -3,7 +3,7 @@ Template.header.events({
 		event.preventDefault();
 
 		if(Meteor.user()){
-			 Router.go('signedin');
+			 Router.go('/');
 		} else {
 			 Router.go('/');
 		}
