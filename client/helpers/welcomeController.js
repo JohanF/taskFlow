@@ -18,7 +18,7 @@ Template.welcomeScreen.rendered = function() {
 
 Template.loggedIn.helpers({
     projectList: function() { 
-        return Projects.find();
+        return Projects.find({members: Meteor.userId()});
         //});
     }
 });
