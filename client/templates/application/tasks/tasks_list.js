@@ -1,7 +1,10 @@
 Template.tasksList.helpers({ 
  tasks: function () {
-      //return Projects.find({"projectTasks.assignedUsers":Meteor.userId()}, {projectTasks : 1});
+      var x = Projects.findOne({"projectTasks.assignedUsers":Meteor.userId()}, {projectTasks : 1}).projectTasks;
 
-      return Projects.find({}, {'projectTasks.title': 1, description: 0});
+      return x.find({assignedUsers:Meteor.userId()});
+
+      // testing @TODO add active project
+
     } 
 });
