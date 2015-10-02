@@ -24,6 +24,9 @@
     	{{>projectCard}}
     	{{>projectCard}}
     </div>
+    <div>
+        {{>createNewProjectButton}}
+    </div>
 
 </template>
 
@@ -32,5 +35,13 @@
         <h3 id="projectName">
     		ProjectName
     	</h3>
+    </div>
+</template>
+
+<template name='createNewProjectButton'>
+    <div class="col-md-12 create-project-button">
+        <button id="createNewProjectButton" class="btn btn-success btn-lg">
+        <p id="buttonText">Create new project</p>
+        </button>
     </div>
 </template>
