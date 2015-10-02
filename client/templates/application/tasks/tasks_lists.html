@@ -1,0 +1,12 @@
+<template name="tasksList">  
+	<div class="tasks">  
+
+	   <div class="small-column-taskview"> 
+	   </div>
+	   <div class="large-column-taskview">  
+		{{#each tasks}}      
+			{{> taskItem}}    
+		{{/each}}  
+	</div>
+	</div> 
+</template>
