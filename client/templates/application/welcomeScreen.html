@@ -20,9 +20,10 @@
         <p>Here is an overview of your projects: </p>
         
     </div>
-    <div id="projectList" style="text-align: center; hide=true;"> 
-    	{{>projectCard}}
-    	{{>projectCard}}
+    <div id="projectSpace" style="text-align: center; hide=true;"> 
+        {{#each projectList}}
+            {{>projectCard}}    
+        {{/each}}
     </div>
     <div>
         {{>createNewProjectButton}}
@@ -33,7 +34,7 @@
 <template name="projectCard">
 	<div class="jumbotron project-card col-md-3">
         <h3 id="projectName">
-    		ProjectName
+    		{{title}}
     	</h3>
     </div>
 </template>

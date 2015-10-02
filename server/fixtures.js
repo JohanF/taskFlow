@@ -20,3 +20,28 @@ if (Tasks.find().count() === 0) {
 	priority: 2 
   });
 }
+//testing
+if (Projects.find().count() === 0) {
+  
+  Projects.insert({
+    title: 'My first project',    
+	description: 'testing purposes...',    
+	status: 'Active',
+	members: ["1231"],
+	creator: "Hacker Man"
+  });
+  Projects.insert({
+    title: 'The second project',    
+	description: 'testing purposes...',    
+	status: 'Active',
+	members: ["dnTuiWp6D8DoXMTBk"],
+	creator: "Hacker Man"
+  });
+  Projects.insert({
+    title: 'Ice cream',    
+	description: 'testing purposes...',    
+	status: 'Active',
+	members: ["dnTuiWp6D8DoXMTBk"],
+	creator: "dnTuiWp6D8DoXMTBk"
+  });
+}
