@@ -1,5 +1,5 @@
 <template name="welcomeScreen">
-	<div class="jumbotron container-fluid">
+	<div class="jumbotron container-fluid main-container">
 		<h1> 
 			{{>notLoggedIn}}
 			{{>loggedIn}}
@@ -32,7 +32,7 @@
 </template>
 
 <template name="projectCard">
-	<div class="jumbotron project-card col-md-4" style="text-align: center;">
+	<div id="projectCard" class="jumbotron project-card col-md-4" style="text-align: center; cursor: pointer;">
         <h3 id="projectName">
     		{{title}}
     	</h3>
