@@ -22,3 +22,24 @@ Template.loggedIn.helpers({
         //});
     }
 });
+
+Template.loggedIn.events({
+    'click #createNewProjectButton': function() {
+       //show modal
+        $("#createProjectModal").show();
+    },
+
+});
+
+Template.createProjectModal.events({
+    'click #closeProjectModal': function () {
+       //close modal
+       console.log("click2");
+        $("#createProjectModal").hide();
+    },
+    'click #createProjectModal': function () {
+        
+        //Call to backend.
+        // $("#createModal").hide();
+    },
+});
