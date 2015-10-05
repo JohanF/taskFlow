@@ -36,12 +36,17 @@ Template.loggedIn.events({
 Template.createProjectModal.events({
     'click #closeProjectModal': function () {
        //close modal
-       console.log("click2");
         $("#createProjectModal").hide();
+        $('#newProjectName').val('');
+        $('#newProjectDescription').val('');
     },
-    'click #createProjectModal': function () {
-        
-        //Call to backend.
-        // $("#createModal").hide();
+    'click #createGameName': function () {
+        var pName = $('#newProjectName').val();
+        var pDesc = $('#newProjectDescription').val();
+        console.log("pName: "+ pName+ " pDesc: "+ pDesc);
+        Meteor.call("createProject", pName, pDesc, Meteor.userId());
+        $("#createProjectModal").hide();
+        $('#newProjectName').val('');
+        $('#newProjectDescription').val('');
     },
 });

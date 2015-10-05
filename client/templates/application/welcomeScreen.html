@@ -1,5 +1,5 @@
 <template name="welcomeScreen">
-	<div class="container">
+	<div class="jumbotron container-fluid">
 		<h1> 
 			{{>notLoggedIn}}
 			{{>loggedIn}}
@@ -17,11 +17,10 @@
 
 <template name="loggedIn"> 
     <div id="loggedInText" style="text-align: center; hide=true;">
-        <h3>Welcome back dear user</h3>
-        <p>Here is an overview of your projects: </p>
-        
+        <h3>Welcome back user</h3>
+        <p>Here is an overview of your projects: </p>  
     </div>
-    <div id="projectSpace" style="text-align: center; hide=true;"> 
+    <div id="projectSpace col-md-12" style="text-align: center; hide=true;"> 
         {{#each projectList}}
             {{>projectCard}}    
         {{/each}}
@@ -33,7 +32,7 @@
 </template>
 
 <template name="projectCard">
-	<div class="jumbotron project-card" style="text-align: center;">
+	<div class="jumbotron project-card col-md-4" style="text-align: center;">
         <h3 id="projectName">
     		{{title}}
     	</h3>
