@@ -22,7 +22,9 @@ Template.loggedIn.helpers({
         //});
     }
 });
-
+Template.loggedIn.rendered = function() {
+    $("#createProjectModal").hide();
+}
 Template.loggedIn.events({
     'click #createNewProjectButton': function() {
        //show modal

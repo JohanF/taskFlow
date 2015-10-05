@@ -38,7 +38,7 @@
 
 .modal {
     width: 300px;
-    height: 50%;
+    height: 50% !important;
     line-height: 200px;
     position: fixed;
     top: 50%; 
@@ -50,8 +50,28 @@
     text-align: center;
     z-index: 11; /* 1px higher than the overlay layer */
 }
-.modal-content {
-    height: 50%;
+.modal-body {
+    height: 150px;
+    vertical-align: top;
+
+    label{
+        
+        font-size: 18px;
+        color: #555;
+        height: 20px;
+        width: 200px;
+        margin-top: 10px;
+        margin-left: 10px;
+        text-align: right;
+        margin-right:15px;
+        float:left;
+    }
+    input{
+        height: 20px;
+        width: 300px;
+        border: 1px solid #000;
+        margin-top: 10px;
+    }
 }
 .overlay{
   position: absolute;
@@ -61,7 +81,4 @@
   height: 100%;
   z-index: 10;
   background-color: rgba(0,0,0,0.5); /*dim the background*/
-}
-.project-info-input{
-    
 }
