@@ -34,7 +34,7 @@ Template.loggedIn.events({
        //show modal
         console.log("clicked a project");
         //route to the correct one
-        Router.go("projectview");
+        //Router.go("projectview");
     }
 });
 
@@ -55,3 +55,9 @@ Template.createProjectModal.events({
         $('#newProjectDescription').val('');
     },
 });
+
+navigateProject = function(projectId) {
+    Router.go("projectview", {
+        _projectId: projectId
+    });
+}

@@ -1,5 +1,5 @@
 <template name="welcomeScreen">
-	<div class="jumbotron container-fluid main-container">
+	<div class="jumbotron container-fluid main-container" style="padding-top: 0%;">
 		<h1> 
 			{{>notLoggedIn}}
 			{{>loggedIn}}
@@ -32,7 +32,7 @@
 </template>
 
 <template name="projectCard">
-	<div id="projectCard" class="jumbotron project-card col-md-4" style="text-align: center; cursor: pointer;">
+	<div id="projectCard" class="jumbotron project-card col-md-4" onclick="navigateProject('{{_id}}')" style="text-align: center; cursor: pointer;">
         <h3 id="projectName">
     		{{title}}
     	</h3>
