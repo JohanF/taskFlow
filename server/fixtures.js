@@ -1,26 +1,48 @@
-/*if (Tasks.find().count() === 0) {
+if (Tasks.find().count() === 0) {
   Tasks.insert({
     title: 'Do laundry',    
 	description: 'Dirty clothes are bad, fix.',    
 	status: '50%',
-	priority: 3 
+	priority: 2,
+	        assignedUsers : ["J7DZRBWTmGoW3StH6"],
+	        project: "B3MowNggmDxdo5ugL"
   });
   
   Tasks.insert({
     title: 'Eat food',    
 	description: 'Eat food or die',    
 	status: 'Cooked', 
-	priority: 1 
+	priority: 1,
+	        assignedUsers : ["J7DZRBWTmGoW3StH6"],
+	        project: "B3MowNggmDxdo5ugL"
   });
   
   Tasks.insert({
     title: 'Go to bed',    
 	description: 'It is nice',    
 	status: 'Insomnia ETA: 37 minutes',  
-	priority: 2 
+	priority: 3,
+	        assignedUsers : ["J7DZRBWTmGoW3StH6"],
+	        project: "B3MowNggmDxdo5ugL"
   });
-}*/
-//testing
+  Tasks.insert({
+    title: 'Wake up',    
+	description: 'It is also nice',    
+	status: 'Insomnia ETA: 37 minutes',  
+	priority: 4,
+	        assignedUsers : ["J7DZRBWTmGoW3StH6"],
+	        project: "B3MowNggmDxdo5ugL"
+  });
+  Tasks.insert({
+    title: 'Go to bed',    
+	description: 'It is nice',    
+	status: 'Insomnia ETA: 37 minutes',  
+	priority: 3,
+	        assignedUsers : [""],
+	        project: ""
+  });
+}
+
 if (Projects.find().count() === 0) {
   
   Projects.insert({
@@ -28,31 +50,7 @@ if (Projects.find().count() === 0) {
 	description: 'testing purposes...',    
 	status: 'Active',
 	members: ["wnc84uM4xND6aX3pB"],
-	creator: "Hacker Man",
-	projectTasks : [ 
-	    {
-	        title: 'Do laundry',    
-			description: 'Dirty clothes are bad, fix.',    
-			status: '50%',
-			priority: 3,
-	        assignedUsers : ["wnc84uM4xND6aX3pB"]
-	    },
-	    {
-	        title: 'Eat food',    
-			description: 'Eat food or die',    
-			status: 'Cooked', 
-			priority: 1,
-			assignedUsers : ["wnc84uM4xND6aX3pB"]
-	    },
-	    {
-	        title: 'Go to bed',    
-			description: 'It is nice',    
-			status: 'Insomnia ETA: 37 minutes',  
-			priority: 2,
-			assignedUsers : []
-	    }
-	]
-
+	creator: "Hacker Man"
   });
   Projects.insert({
     title: 'The second project',    

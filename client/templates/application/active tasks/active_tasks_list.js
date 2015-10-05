@@ -1,12 +1,11 @@
 Template.activeTasksList.helpers({ 
  tasks: function () {
-      var x = Projects.findOne({"projectTasks.assignedUsers":Meteor.userId()}, {projectTasks : 1});
+      //var x = Tasks.find({assignedUsers:Meteor.userId(), project:"B3MowNggmDxdo5ugL"});
 
-      if(!x) return [];
+      // @TODO Sort by createDate
+      //var tempArray = x.projectTasks || [];
 
-      var tempArray = x.projectTasks || [];
-
-      return _.filter(tempArray, function(temp) { return temp.priority <= 1});        
+      return [_.min(Tasks.find({assignedUsers:Meteor.userId(), project:"B3MowNggmDxdo5ugL"}).fetch(), function(temp) { return temp.priority;})];        
       // testing @TODO priority has to be changed to be contexual per user
       // testing @TODO add active project
 
