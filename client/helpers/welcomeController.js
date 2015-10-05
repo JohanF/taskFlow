@@ -29,12 +29,6 @@ Template.loggedIn.events({
     'click #createNewProjectButton': function() {
        //show modal
         $("#createProjectModal").show();
-    },
-     'click #projectCard': function() {
-       //show modal
-        console.log("clicked a project");
-        //route to the correct one
-        //Router.go("projectview");
     }
 });
 
