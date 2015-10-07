@@ -4,7 +4,7 @@ if (Tasks.find().count() === 0) {
 	description: 'Dirty clothes are bad, fix.',    
 	status: '50%',
 	priority: 2,
-	        assignedUsers : ["J7DZRBWTmGoW3StH6"],
+	        assignedUsers : ["J7DZRBWTmGoW3StH6,dnTuiWp6D8DoXMTBk"],
 	        project: "B3MowNggmDxdo5ugL"
   });
   
@@ -13,7 +13,7 @@ if (Tasks.find().count() === 0) {
 	description: 'Eat food or die',    
 	status: 'Cooked', 
 	priority: 1,
-	        assignedUsers : ["J7DZRBWTmGoW3StH6"],
+	        assignedUsers : ["J7DZRBWTmGoW3StH6,dnTuiWp6D8DoXMTBk"],
 	        project: "B3MowNggmDxdo5ugL"
   });
   
@@ -22,7 +22,7 @@ if (Tasks.find().count() === 0) {
 	description: 'It is nice',    
 	status: 'Insomnia ETA: 37 minutes',  
 	priority: 3,
-	        assignedUsers : ["J7DZRBWTmGoW3StH6"],
+	        assignedUsers : ["J7DZRBWTmGoW3StH6,dnTuiWp6D8DoXMTBk"],
 	        project: "B3MowNggmDxdo5ugL"
   });
   Tasks.insert({
@@ -30,7 +30,7 @@ if (Tasks.find().count() === 0) {
 	description: 'It is also nice',    
 	status: 'Insomnia ETA: 37 minutes',  
 	priority: 4,
-	        assignedUsers : ["J7DZRBWTmGoW3StH6"],
+	        assignedUsers : ["J7DZRBWTmGoW3StH6,dnTuiWp6D8DoXMTBk"],
 	        project: "B3MowNggmDxdo5ugL"
   });
   Tasks.insert({

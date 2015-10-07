@@ -31,7 +31,6 @@
         padding-right: 2vw
     }
 }
-
 .header-container{
     background-color: #323232;
     height: 7vh;
@@ -39,12 +38,11 @@
     position: fixed !important;
     top: 0;
     width: 100vw !important;
-    z-index: 100 !important;/* make it appear no matter what*/
+    z-index: 99 !important;/* make it appear no matter what*/
 }
 
 
 .sidebar-container{
-    margin-top: 7vh !important;
     position: fixed !important;
     background-color: #323232;
     margin: auto;
@@ -54,6 +52,10 @@
     text-align:center;
     margin-bottom: -5000px;
     padding-bottom: 5000px;
+    z-index: 100 !important;
+    .sidebar-content{
+        margin-top: 7vh;
+    }
 }
 
 

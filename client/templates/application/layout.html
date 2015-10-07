@@ -30,16 +30,18 @@
 		<div class="rowzzz">
 		   <div class="sidebar-container"> 
 			   {{>sideBar}}
-		   	</div>
-		    <div class="page-wrap container-fluid"> 
+		   </div>
+		   <div class="page-wrap container-fluid"> 
 		    	{{> yield}}
-		    </div>
+		   </div>
 	    </div>
 	  </div>
 </template>
 <template name="sideBar">
+	<div class="sidebar-content">
 	 <p style="color: white; cursor: pointer;" onclick="goHome()">Home</p>
 	 <p style="color: white; cursor: pointer;" onclick="loadProfile()">Profile</p>
 	 <p style="color: white; cursor: pointer;" onclick="loadChat()">TestChat</p>
 	 <p style="color: white; cursor: pointer;" onclick="killWorld()">Destroy the world!</p>
+	</div>
 </template>
