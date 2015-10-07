@@ -9,14 +9,14 @@
     padding: 0 !important;
 }
 .main-div{
-        overflow: hidden;
+    overflow: hidden;
+    z-index: -2;
 }
 /* ----------- +1080 Screens ----------- 
 @media screen 
   and (min-device-width: 1080px)
 { */
 .header-div{
-	background-color: #323232;
 	position: fixed;
     top: 0;
     margin: auto;
@@ -24,14 +24,22 @@
     min-height: 45px !important;
     text-align:center;
     .make-lg-column(4,2);
-    z-index: 1;
+}
+.login-div{
+    text-align: right;
+    .login-text{
+        padding-right: 2vw
+    }
 }
 
 .header-container{
+    background-color: #323232;
     height: 7vh;
+    min-height: 45px !important;
     position: fixed !important;
     top: 0;
     width: 100vw !important;
+    z-index: 100 !important;/* make it appear no matter what*/
 }
 
 
@@ -58,7 +66,6 @@
     width: auto;
     position: relative;
     overflow: auto;
-    z-index: 0;
 }
 
 /*}
