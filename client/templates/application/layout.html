@@ -29,19 +29,17 @@
 	<div id="main" class="main-div" >
 		<div class="rowzzz">
 		   <div class="sidebar-container"> 
-		   <i class="fa fa-spinner fa-spin fa-3x"></i><br>
-			<i class="fa fa-circle-o-notch fa-spin fa-3x"></i><br>
-		   <p style="color: white;">Account</p>
-			<i class="fa fa-refresh fa-spin fa-3x"></i><br>
-			 <p style="color: white;">Chat</p>
-			<i class="fa fa-cog fa-spin fa-3x"></i><br>
-			 <p style="color: white;">other cool stuff</p>
-			<i class="fa fa-spinner fa-pulse fa-3x"></i>
-			<h1>1</h1>
+			   {{>sideBar}}
 		   	</div>
 		    <div class="page-wrap container-fluid"> 
 		    	{{> yield}}
 		    </div>
 	    </div>
 	  </div>
+</template>
+<template name="sideBar">
+	 <p style="color: white; cursor: pointer;" onclick="goHome()">Home</p>
+	 <p style="color: white; cursor: pointer;" onclick="loadProfile()">Profile</p>
+	 <p style="color: white; cursor: pointer;" onclick="loadChat()">TestChat</p>
+	 <p style="color: white; cursor: pointer;" onclick="killWorld()">Destroy the world!</p>
 </template>
