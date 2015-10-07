@@ -1,0 +1,28 @@
+<template name="taskModal">
+    <div class="overlay" id="taskModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close hide-modal" id="closeTaskModal" data-dismiss="modal" aria-hidden="false">&times;</button>
+                    <h3 class="modal-title">Taskinfo</h3>
+                </div>
+                <div class="modal-body">
+                    
+                        
+                        <div class="form-group">
+                            <label for="Name">Name:</label>
+                            <input name="Name" id="newProjectName"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="Description">Short description:</label>
+                            <input name="Description" id="newProjectDescription"/>
+                        </div>
+                   
+                </div>
+                <div class="modal-footer">
+                    <button class="col-md-4 col-md-offset-4 btn  btn-lg" id="createGameName">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>
