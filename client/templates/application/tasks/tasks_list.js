@@ -1,16 +1,17 @@
 if(Meteor.isClient) {  
 	Template.tasksList.helpers({ 
 	 tasks: function () {
-	      return Tasks.find({assignedUsers:Meteor.userId(), project:"B3MowNggmDxdo5ugL"}, {sort: {priority: 1}});
+	      return Tasks.find({assignedUsers:Meteor.userId(), project:projectData._id}, {sort: {priority: 1}});
 	    } 
 	});
 
 	Template.tasksList.rendered = function() {
-	    this.$('#items').sortable({
+	    this.$('#taskListDiv').sortable({
 	        stop: function(e, ui) {
 	          el = ui.item.get(0)
 	          before = ui.item.prev().get(0)
 	          after = ui.item.next().get(0)
+	          
 	 
 	          if(!before) {
 	            newRank = Blaze.getData(after).priority - 1
