@@ -1,41 +1,42 @@
 <template name="layout">
-   <div class="container-fluid header-container">
+    <div class="container-fluid">
+		{{> header}}
+	</div>
+   <div class="container-fluid">
+	  <div id="main" class="main-div" >
 		<div class="rowzzz">
-			<div class="basic-column">
-				1s
+		   <div class="sidebar-container"> 
+		   <i class="fa fa-spinner fa-spin fa-3x"></i><br>
+			<i class="fa fa-circle-o-notch fa-spin fa-3x"></i><br>
+		   <p style="color: white;">Account</p>
+			<i class="fa fa-refresh fa-spin fa-3x"></i><br>
+			 <p style="color: white;">Chat</p>
+			<i class="fa fa-cog fa-spin fa-3x"></i><br>
+			 <p style="color: white;">other cool stuff</p>
+			<i class="fa fa-spinner fa-pulse fa-3x"></i>
+			<h1>1</h1>
+		   	</div>
+		    <div class="page-wrap container-fluid"> 
+		    	{{> yield}}
 		    </div>
-		    <div class="basic-column"> 
+	    </div>
+	  </div>
+    </div>
+
+</template>
+
+<template name="header">
+	<div class="rowzzz">
+			<div class="header-container">
+				
+		    </div>
+		    <div class="header-container"> 
 		     <img src="/img/tflogo.png" class="header-logo" />        
 		    	      
 
 		    </div>
-		    <div class="basic-column">
-		    	<h1>{{> header}} </h1>  	
+		    <div class="header-container">
+		    	<h4>{{> headerlogin}} </h4>  	
 		    </div>
 	    </div>
-	</div>
-
-   <div class="container-fluid sidebar-container">
-    <div id="main">
-
-
-	<div class="rowzzz">
-	   <div class="small-column"> 
-	   <i class="fa fa-spinner fa-spin fa-3x"></i><br>
-		<i class="fa fa-circle-o-notch fa-spin fa-3x"></i><br>
-	   <p style="color: white;">Account</p>
-		<i class="fa fa-refresh fa-spin fa-3x"></i><br>
-		 <p style="color: white;">Chat</p>
-		<i class="fa fa-cog fa-spin fa-3x"></i><br>
-		 <p style="color: white;">other cool stuff</p>
-		<i class="fa fa-spinner fa-pulse fa-3x"></i>
-		<h1>1</h1>
-	   	</div>
-	    <div class="large-column">  	
-	    	{{> yield}}
-	    </div>
-    </div>
-
-    </div>
-  </div>
 </template>

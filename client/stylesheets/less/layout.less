@@ -1,0 +1,88 @@
+@import ".\client\stylesheets\vendor\custom.bootstrap.mixins.import.less";
+@import ".\client\stylesheets\vendor\custom.bootstrap.import.less";
+
+
+.header-logo{
+    height: 100%;
+}
+.container-fluid{
+    padding: 0 !important;
+}
+.main-div{
+        overflow: hidden;
+}
+/* ----------- +1080 Screens ----------- */
+@media screen 
+  and (min-device-width: 1080px)
+{ 
+.header-container{
+	background-color: #323232;
+	position: fixed;
+    margin: auto;
+    height: 5vh;
+    text-align:center;
+    .make-lg-column(4,2);
+}
+
+
+.sidebar-container{
+	position: fixed;
+	background-color: #323232;
+	margin: auto;
+    height: 100%;
+    .make-lg-column(1,0);
+    text-align:center;
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
+}
+
+
+.page-wrap {
+	position: relative;
+    margin: 0;
+    .make-lg-column(11,0);
+    width: auto;
+    position: relative;
+    overflow: auto;
+    z-index: 1;
+}
+
+}
+/* ----------- +800 Screens ----------- */
+@media screen 
+  and (min-device-width: 500px)
+{ 
+.header-container{
+    background-color: #323232;
+    position: fixed;
+    margin: auto;
+    height: 5vh;
+    text-align:center;
+    .make-md-column(4,2);
+}
+
+
+.sidebar-container{
+    position: fixed;
+    background-color: #323232;
+    margin: auto;
+    height: 100%;
+    .make-md-column(1,0);
+    text-align:center;
+    margin-bottom: -5000px;
+    padding-bottom: 5000px;
+}
+
+
+.page-wrap {
+    position: relative;
+    margin: 0;
+    .make-md-column(11,0);
+    width: auto;
+    position: relative;
+    overflow: auto;
+    z-index: 1;
+}
+
+}
+
