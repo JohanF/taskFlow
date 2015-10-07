@@ -1,21 +1,21 @@
 <template name="layout">
-   <div class="container-fluid">
-	<div class="rowzzz">
-		<div class="basic-column">
-			<h1>1</h1>
-	    </div>
-	    <div class="basic-column"> 
-	    <br><br>    
-	      {{> header}}  
+   <div class="container-fluid header-container">
+		<div class="rowzzz">
+			<div class="basic-column">
+				1s
+		    </div>
+		    <div class="basic-column"> 
+		     <img src="/img/tflogo.png" class="header-logo" />        
+		    	      
 
+		    </div>
+		    <div class="basic-column">
+		    	<h1>{{> header}} </h1>  	
+		    </div>
 	    </div>
-	    <div class="basic-column">
-	    	<h1>3</h1>  	
-	    </div>
-    </div>
-    </div>
+	</div>
 
-   <div class="container-fluid">
+   <div class="container-fluid sidebar-container">
     <div id="main">
 
 
@@ -23,8 +23,11 @@
 	   <div class="small-column"> 
 	   <i class="fa fa-spinner fa-spin fa-3x"></i><br>
 		<i class="fa fa-circle-o-notch fa-spin fa-3x"></i><br>
+	   <p style="color: white;">Account</p>
 		<i class="fa fa-refresh fa-spin fa-3x"></i><br>
+		 <p style="color: white;">Chat</p>
 		<i class="fa fa-cog fa-spin fa-3x"></i><br>
+		 <p style="color: white;">other cool stuff</p>
 		<i class="fa fa-spinner fa-pulse fa-3x"></i>
 		<h1>1</h1>
 	   	</div>
