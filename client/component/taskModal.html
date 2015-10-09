@@ -4,23 +4,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close hide-modal" id="closeTaskModal" data-dismiss="modal" aria-hidden="false">&times;</button>
-                    <h3 class="modal-title">Taskinfo</h3>
+                    <h3 class="modal-title">Taskinfo</h3> Users: User1, User2 ... (+2)
                 </div>
-                <div class="modal-body">
-                    
-                        
-                        <div class="form-group">
-                            <label for="Name">Name:</label>
-                            <input name="Name" id="newProjectName"/>
-                        </div>
-                        <div class="form-group">
-                            <label for="Description">Short description:</label>
-                            <input name="Description" id="newProjectDescription"/>
-                        </div>
-                   
+                <div class="modal-body activity-modal">
+                <h3 class="modal-title">Activity log</h3>
+
+                  {{#each taskActiviy}}
+                      {{>taskActivityItem}}
+                  {{/each}}
+
                 </div>
                 <div class="modal-footer">
-                    <button class="col-md-4 col-md-offset-4 btn  btn-lg" id="createGameName">Create</button>
+                  <h4> Last updated: </h4> 3 days ago.
                 </div>
             </div>
         </div>
