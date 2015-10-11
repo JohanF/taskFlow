@@ -16,3 +16,4 @@ accounts-password
 fortawesome:fontawesome
 twbs:bootstrap
 mrt:jquery-ui
+momentjs:moment

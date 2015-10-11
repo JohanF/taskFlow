@@ -67,19 +67,16 @@ if (Projects.find().count() === 0) {
 
 if (TaskActivities.find().count() === 0) {
     TaskActivities.insert({
-      description:'Task created'
+      description:'Task created',
+      createdAt: Date.now()
     });
     TaskActivities.insert({
-      description:'Working on task'
+      description:'Working on task',
+      createdAt: Date.now()
     });
     TaskActivities.insert({
-      description:'Half way there..'
-    });
-    TaskActivities.insert({
-      description:'Almost done..'
-    });
-    TaskActivities.insert({
-      description:'Completed!'
+      description:'Completed!',
+      createdAt: Date.now()
     });
 
 }
