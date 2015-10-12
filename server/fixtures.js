@@ -64,19 +64,3 @@ if (Projects.find().count() === 0) {
 	creator: "dnTuiWp6D8DoXMTBk"
   });
 }
-
-if (TaskActivities.find().count() === 0) {
-    TaskActivities.insert({
-      description:'Task created',
-      createdAt: Date.now()
-    });
-    TaskActivities.insert({
-      description:'Working on task',
-      createdAt: Date.now()
-    });
-    TaskActivities.insert({
-      description:'Completed!',
-      createdAt: Date.now()
-    });
-
-}
