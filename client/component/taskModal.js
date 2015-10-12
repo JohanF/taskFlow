@@ -2,10 +2,17 @@ Template.taskModal.events({
     'click #closeTaskModal': function () {
        //close modal
         $("#taskModal").hide();
-    },
-    'click #createGameName': function () {
-        var pName = $('#newProjectName').val();
-        var pDesc = $('#newProjectDescription').val();
-        console.log("pName: "+ pName+ " pDesc: "+ pDesc);
-        $("#taskModal").hide();    },
+    }
 });
+
+Template.taskModal.helpers({
+ taskActiviy: function () {
+      return TaskActivities.find({});
+    }
+});
+
+Template.registerHelper('last',
+    function(list, elem) {
+        return _.last(list) === elem;
+    }
+);
