@@ -7,10 +7,13 @@
                     <h3 class="modal-title">Taskinfo</h3> Users: User1, User2 ... (+2)
                 </div>
                 <div class="modal-body activity-modal">
-                <h3 class="modal-title">Activity log</h3>
 
                   {{#each taskActiviy}}
                       {{>taskActivityItem}}
+                      <!-- {{#if last ../taskActiviy this}}
+                          3 Activities
+                      {{else}} -->
+                      <!-- {{/if}} -->
                   {{/each}}
 
                 </div>

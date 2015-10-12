@@ -10,3 +10,9 @@ Template.taskModal.helpers({
       return TaskActivities.find({});
     }
 });
+
+Template.registerHelper('last',
+    function(list, elem) {
+        return _.last(list) === elem;
+    }
+);
