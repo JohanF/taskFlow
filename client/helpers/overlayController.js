@@ -1,3 +1,14 @@
+Template.sideBar.helpers({
+   userName: function() {
+      if(Meteor.userId()){
+         return Meteor.user().username;
+      }
+      else{
+         return ""
+      }
+   }
+});
+
 loadProfile = function() {
     Router.go("profileview", {
         _userId: Meteor.userId()

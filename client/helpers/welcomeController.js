@@ -11,11 +11,12 @@ Template.welcomeScreen.rendered = function() {
             $("#loggedInText").hide();
             $("#notLoggedInText").show();
         }
-       
+
     });
 }
+
 Template.loggedIn.helpers({
-    projectList: function() { 
+    projectList: function() {
         return Projects.find({members: Meteor.userId()});
         //});
     }
