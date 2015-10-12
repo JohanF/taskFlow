@@ -7,7 +7,7 @@ Template.taskModal.events({
 
 Template.taskModal.helpers({
  taskActiviy: function () {
-      return TaskActivities.find({});
+      return TaskActivities.find({}, {sort: {createdAt: -1}});
     }
 });
 

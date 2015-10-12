@@ -68,6 +68,7 @@ if (Projects.find().count() === 0) {
 if (TaskActivities.find().count() === 0) {
     TaskActivities.insert({
       description:'Task created',
+      user: "usr1",
       createdAt: Date.now()
     });
     TaskActivities.insert({
