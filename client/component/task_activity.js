@@ -6,3 +6,4 @@ Template.taskActivityItem.helpers({
     return Tasks.findOne({_id:this.task}).title;
   }
 });
+  
