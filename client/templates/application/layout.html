@@ -12,31 +12,34 @@
 <template name="header">
 	<div class="rowzzz">
 			<div class="header-div">
-				
+
 		    </div>
-		    <div class="header-div"> 
-		    	<img src="/img/tflogo.png" class="header-logo" style="cursor: pointer;" onclick="goHome()"/>        
+		    <div class="header-div">
+		    	<img src="/img/tflogo.png" class="header-logo" style="cursor: pointer;" onclick="goHome()"/>
 		    </div>
 
 		    <div class="header-div login-div">
-		    	<h4 class="login-text">{{> headerlogin}} </h4>  	
+		    	<h4 class="login-text">{{> headerlogin}} </h4>
 		    </div>
 	    </div>
 </template>
 
-<template name="mainBody"> 
+<template name="mainBody">
 	<div id="main" class="main-div" >
 		<div class="rowzzz">
-		   <div class="sidebar-container"> 
+		   <div class="sidebar-container">
 			   {{>sideBar}}
 		   </div>
-		   <div class="page-wrap container-fluid"> 
+		   <div class="page-wrap container-fluid">
 		    	{{> yield}}
 		   </div>
 	    </div>
 	  </div>
 </template>
 <template name="sideBar">
+   <div class="sidebar-header">
+      <h4 class="sidebar-user-header" style="cursor: pointer;" onclick="goHome()">{{userName}}</h4>
+   </div>
 	<div class="sidebar-content">
 	 <p style="color: white; cursor: pointer;" onclick="goHome()">Home</p>
 	 <p style="color: white; cursor: pointer;" onclick="loadProfile()">Profile</p>
