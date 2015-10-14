@@ -64,23 +64,13 @@ if(Meteor.isClient) {
 						task: Blaze.getData(el)._id
 					});
 
-					console.log($(this).sortable('toArray', { attribute: 'description' }));
+					TaskActivities.insert({
+						description:'Work being performed', // rename this
+						user: Meteor.userId(),
+						createdAt: Date.now(),
+						task: Blaze.getData($('#taskListDiv').children()[0])._id
+					});
 
-
-					// bfr = ui.item.prev();
-					// newFirst = null;
-					//
-					// while (bfr){
-					// 	newFirst = bfr.get(0);
-					// 	bfr = bfr.prev();
-					// }
-					//
-					// TaskActivities.insert({
-					// 	description:'Work being performed', // rename this
-					// 	user: Meteor.userId(),
-					// 	createdAt: Date.now(),
-					// 	task: Blaze.getData(newFirst)._id
-					// });
 
 					removedFirst = false;
 				}
