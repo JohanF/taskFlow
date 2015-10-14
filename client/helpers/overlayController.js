@@ -1,10 +1,10 @@
 Template.sideBar.helpers({
    userName: function() {
-      if(Meteor.userId()){
+      if(Meteor.user()){
          return Meteor.user().username;
       }
       else{
-         return ""
+         return "";
       }
    }
 });
@@ -23,6 +23,23 @@ loadChat = function() {
         _userId: Meteor.userId()
     });
 }
+loadChat = function(chatId) {
+    Router.go("chatview", {
+        _chatId: chatId
+    });
+}
 killWorld = function(){
 	Router.go("/killworld");
 }
+
+getChats = function(){
+   console.log("returning chats: ")
+   console.log(Chats.find());
+   return Chats.find();
+}
+
+Template.chatList.helpers ({
+   chatList: function() {
+      return Chats.find({members: Meteor.userId()});
+   }
+});

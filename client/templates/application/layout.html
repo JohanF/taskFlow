@@ -43,7 +43,19 @@
 	<div class="sidebar-content">
 	 <p style="color: white; cursor: pointer;" onclick="goHome()">Home</p>
 	 <p style="color: white; cursor: pointer;" onclick="loadProfile()">Profile</p>
-	 <p style="color: white; cursor: pointer;" onclick="loadChat()">TestChat</p>
-	 <p style="color: white; cursor: pointer;" onclick="killWorld()">Destroy the world!</p>
+	 <p style="color: white; cursor: pointer;" onclick="getChats()">Destroy the world!</p>
+    {{> chatList}}
 	</div>
+</template>
+
+<template name="chatList">
+   <p style="color: white; padding-top: 7vh;"> - Chats -</p>
+   {{#each chatList}}
+       {{>chatName}}
+   {{/each}}
+
+</template>
+
+<template name= "chatName">
+   <p style="color: white; cursor: pointer;" onclick="loadChat('{{_id}}')">{{title}}</p>
 </template>

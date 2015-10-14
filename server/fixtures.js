@@ -42,7 +42,23 @@ if (Tasks.find().count() === 0) {
 	        project: ""
   });
 }
-
+if(Chats.find().count() === 0) {
+   //chat structure on creation
+   Chats.insert({
+      title:      'Training chat',
+      description: 'Here we chat about what to train',
+      members:    ['userId1', 'userId2', 'Etk4e8uZLnWzk8Sht'],
+      admin:      ['couldBeUsefulInTheFuture'],
+      messageHistory: []
+   });
+   Chats.insert({
+      title:      'Party chat',
+      description: 'Here we party!',
+      members:    ['userId1', 'userId2', 'Etk4e8uZLnWzk8Sht'],
+      admin:      ['couldBeUsefulInTheFuture'],
+      messageHistory: []
+   });
+}
 if (Projects.find().count() === 0) {
 
   Projects.insert({

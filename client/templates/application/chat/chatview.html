@@ -1,5 +1,10 @@
 <template name="chatview">
 	<div class="chat-primary">
+		<div class = "chat-header-div">
+			<div class="l-chat">{{chatName}}</div>
+			 <div class="m-chat">{{chatDescription}}</div>
+			 <div class="r-chat"><a href="" class="settings-icon"></a></div>
+		</div>
 		<div class="chat-div">
 			{{> messages}}
 		</div>
@@ -10,18 +15,25 @@
 </template>
 
 <template name="messages">
-		{{> message text="Banana?"}}
-		{{> message text="Banana!"}}
-		{{> message text="ipsum sipsum dipsum mipsum"}}
-		{{> message text="mipmap bananana! Bring many more banana"}}
+	{{#each messageHistory}}
+       {{>messageTrue}}
+   {{/each}}
 </template>
 
 <template name="entry">
 	<input type="text" class="chat-input-text" placeholder="">
 </template>
 
+<template name="messageTrue">
+	<div class="message">
+		<a href="" class="message_profile-pic"></a>
+		<a href="" class="message_username">Scott</a>
+		<span class="message_timestamp">{{timeStamp}}</span>
+		<span class="message_content">{{text}}</span>
+	</div>
+</template>
 
-<template name="message">
+<template name="messageTest">
 	<div class="message">
 		<a href="" class="message_profile-pic"></a>
 		<a href="" class="message_username">Scott</a>
