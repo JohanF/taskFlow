@@ -6,21 +6,37 @@ if(Meteor.isClient) {
 	});
 
 	Template.tasksList.rendered = function() {
+
+		removedFirst = false;
+
 	    this.$('#taskListDiv').sortable({
+					// start: function(e, ui) {
+					// 	il = ui.item.index();
+					// 		console.log(Blaze.getData(il));
+					// },
 	        stop: function(e, ui) {
+
+					//
+					// console.log("ui ")
+					// console.log(ui);
+
 	          el = ui.item.get(0)
 	          before = ui.item.prev().get(0)
 	          after = ui.item.next().get(0)
-
-
-	          if(!before) {
+			//   beforebefore = ui.item.prev().prev().get(0);
+			  //
+			//   console.log(el);
+			//   console.log(before);
+			//   console.log(after);
+			//   console.log(beforebefore);
+	          if(!before && !removedFirst) {
 							TaskActivities.insert({
 					      description:'Work stopped', // rename this
 								user: Meteor.userId(),
 					      createdAt: Date.now(),
 								task: Blaze.getData(after)._id
 					    });
-							
+
 							TaskActivities.insert({
 					      description:'Work being performed', // rename this
 								user: Meteor.userId(),
@@ -39,8 +55,36 @@ if(Meteor.isClient) {
 	            newRank = (Blaze.getData(after).priority +
 	                       Blaze.getData(before).priority)/2
 	            }
+
+				if(removedFirst){
+					TaskActivities.insert({
+						description:'Work stopped', // rename this
+						user: Meteor.userId(),
+						createdAt: Date.now(),
+						task: Blaze.getData(el)._id
+					});
+
+					TaskActivities.insert({
+						description:'Work being performed', // rename this
+						user: Meteor.userId(),
+						createdAt: Date.now(),
+						task: Blaze.getData($('#taskListDiv').children()[0])._id
+					});
+
+
+					removedFirst = false;
+				}
+
 	          Tasks.update({_id: Blaze.getData(el)._id}, {$set: {priority: newRank}})
 	        }
 	    })
+			// this.$('#taskListDiv').sortable({
+			this.$('#taskListDiv').sortable({
+					start: function(e, ui) {
+						if(ui.item.index() == 0){
+							removedFirst = true;
+						}
+					},
+				})
 	}
  }
