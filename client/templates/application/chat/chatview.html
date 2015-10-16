@@ -16,7 +16,7 @@
 
 <template name="messages">
 	{{#each messageHistory}}
-       {{>messageTrue}}
+       {{>message}}
    {{/each}}
 </template>
 
@@ -24,20 +24,13 @@
 	<input type="text" class="chat-input-text" placeholder="">
 </template>
 
-<template name="messageTrue">
+<template name="message">
 	<div class="message">
 		<a href="" class="message_profile-pic"></a>
 		<a href="" class="message_username">{{user}}</a>
-		<span class="message_timestamp">{{timeStamp}}</span>
-		<span class="message_content">{{text}}</span>
-	</div>
-</template>
-
-<template name="messageTest">
-	<div class="message">
-		<a href="" class="message_profile-pic"></a>
-		<a href="" class="message_username">Scott</a>
-		<span class="message_timestamp">13:37</span>
-		<span class="message_content">{{text}}</span>
+		<span class="message_timestamp">{{timestamp}}</span>
+		{{#each text}}
+			<span class="message_content">{{this}}</span>
+		{{/each}}
 	</div>
 </template>

@@ -1,9 +1,16 @@
 Template.chatview.helpers({
    chatName: function() {
-      return Chats.findOne(chatData._id).title;
+      if(Chats.findOne(chatData._id) != undefined ){
+         return Chats.findOne(chatData._id).title;
+      }
+      return "";
    },
    chatDescription: function() {
-      return Chats.findOne(chatData._id).description;
+      if(Chats.findOne(chatData._id) != undefined ){
+         return Chats.findOne(chatData._id).description;
+      }
+      return "";
+
    }
 });
 
@@ -19,14 +26,13 @@ Template.entry.events({
                         text: $('.chat-input-text').val(),
                         profilePic:''
                      };
-            console.log("posting to db");
             Meteor.call("postToChat", chatData._id, msg);
             if(msg.text == 'ClearChat'){
                console.log("clearing chat");
                Meteor.call("clearChat", chatData._id);
             }
+            //empty input container
             $('.chat-input-text').val("");
-
             $('.container-fluid').scrollTop( $('.chat-div').prop("scrollHeight") );
         }
     }
@@ -35,16 +41,9 @@ Template.entry.events({
 Template.messages.helpers({
    messageHistory: function(chatId) {
       if(Chats.findOne(chatData._id) != undefined && Chats.findOne(chatData._id).messageHistory.length >0){
-         console.log("chathistory length:");
-         console.log("")
-         console.log("chatid:");
-         console.log(chatData._id);
          return Chats.findOne(chatData._id).messageHistory;
       }
       else{
-         console.log("no chat msg found");
-         console.log("chatid:");
-         console.log(chatData._id);
          return null;
       }
    }
