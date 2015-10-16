@@ -7,7 +7,7 @@ Template.taskModal.events({
 
 Template.taskModal.helpers({
  taskActiviy: function () {
-      return TaskActivities.find({}, {sort: {createdAt: -1}});
+      return TaskActivities.find({task:Session.get('selectedTask')}, {sort: {createdAt: -1}});
     }
 });
 

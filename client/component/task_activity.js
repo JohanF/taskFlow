@@ -4,6 +4,8 @@ Template.taskActivityItem.helpers({
   },
   taskName: function () {
     return Tasks.findOne({_id:this.task}).title;
+  },
+  activityOwner: function() {
+      return Meteor.users.findOne({_id:this.user}).username;
   }
 });
-  
