@@ -1,6 +1,6 @@
 Template.activityComments.helpers({
  comments: function () {
-      return Comments.find({});
+      return Comments.find({activity:Session.get('activityId')});
     }
 });
 
@@ -13,7 +13,8 @@ Template.activityComments.events({
 
         Comments.insert({
             text: $commentText.val(),
-            date: 'on ' + moment(new Date(this.createdAt)).format('MMMM Do YYYY, h:mm:ss a')
+            date: 'on ' + moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a'),
+            activity: Session.get('activityId')
         })
     }
 });
