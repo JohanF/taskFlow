@@ -11,20 +11,20 @@ Template.profileview.helpers({
 Template.imageGallery.helpers({
    profilePics: function() {
       console.log("returning images");
-      Meteor.call("getImageFilesInProfileFolder", function(err, data){
-         if(err){
-            console.log("error in imageGallery: ")
-            console.log(err);
-            return undefined;
-         }
-         console.log(data)
-         return data;
-      });
-
+      console.log(Session.get("images"));
+      return Session.get("images");
    }
 });
 Template.profileview.rendered = function() {
     $("#createImageModal").hide();
+    //load img urls
+    Meteor.call("getImageFilesInProfileFolder", function(err, data){
+      if(err){
+          console.log("error in imageGallery: ")
+          console.log(err);
+      }
+      Session.set("images",data)
+   });
 }
 
 Template.imageGallery.events({
@@ -39,4 +39,8 @@ Template.imageGallery.events({
 
 showImageGallery = function() {
     $("#createImageModal").show();
+}
+selectNewProfilePic = function(data) {
+    console.log("new pic selected");
+    console.log(data);
 }

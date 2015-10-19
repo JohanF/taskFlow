@@ -9,7 +9,7 @@
                <div class="modal-body">
                      <p>images:</p>
                      {{#each profilePics}}
-                        <p>{{this}}</p>p
+                        {{>profileImage}}
                      {{/each}}
 
 
@@ -23,5 +23,5 @@
 </template>
 
 <template name="profileImage">
-   <p>an image a d adasdasd  </p>
+   <a href="" onclick="selectNewProfilePic('{{this}}')" class="image-option" style="background-image: url(/img/profile-pics/{{this}})"> </a>
 </template>
