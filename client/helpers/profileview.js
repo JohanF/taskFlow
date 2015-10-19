@@ -10,7 +10,17 @@ Template.profileview.helpers({
 });
 Template.imageGallery.helpers({
    profilePics: function() {
-      return ;
+      console.log("returning images");
+      Meteor.call("getImageFilesInProfileFolder", function(err, data){
+         if(err){
+            console.log("error in imageGallery: ")
+            console.log(err);
+            return undefined;
+         }
+         console.log(data)
+         return data;
+      });
+
    }
 });
 Template.profileview.rendered = function() {
