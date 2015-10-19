@@ -1,4 +1,7 @@
 if(Meteor.isClient) {
+
+	 
+
 	Template.tasksList.helpers({
 	 tasks: function () {
 	      return Tasks.find({assignedUsers:Meteor.userId(), project:projectData._id}, {sort: {priority: 1}});
