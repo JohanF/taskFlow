@@ -7,9 +7,6 @@ Meteor.methods({
        var cleanedUpFiles = _(files).reject( function(fileName) {
            return fileName.indexOf('.png') < 0;
        });
-       console.log("returning files!");
-       console.log(cleanedUpFiles);
-
        return cleanedUpFiles;
 
    }

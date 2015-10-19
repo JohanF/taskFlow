@@ -48,3 +48,12 @@ Template.messages.helpers({
       }
    }
 });
+Template.message.helpers({
+   profilePic: function() {
+      if(Meteor.user().profile.pic != undefined){
+         return Meteor.user().profile.pic;
+      }else{
+         return "/img/profile-pic/kungfu-Minion.png";
+      }
+   }
+});

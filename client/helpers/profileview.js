@@ -6,12 +6,17 @@ Template.profileview.helpers({
       else{
          return "";
       }
+   },
+   profilePic: function() {
+      if(Meteor.user().profile.pic != undefined){
+         return Meteor.user().profile.pic;
+      }else{
+         return "/img/profile-pic/kungfu-Minion.png";
+      }
    }
 });
 Template.imageGallery.helpers({
    profilePics: function() {
-      console.log("returning images");
-      console.log(Session.get("images"));
       return Session.get("images");
    }
 });
@@ -41,6 +46,5 @@ showImageGallery = function() {
     $("#createImageModal").show();
 }
 selectNewProfilePic = function(data) {
-    console.log("new pic selected");
-    console.log(data);
+    Meteor.call("updateUserImage", Meteor.user()._id, data);
 }
