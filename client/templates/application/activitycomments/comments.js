@@ -11,10 +11,7 @@ Template.activityComments.events({
     var $commentText = $(e.target).find('[name=comment]');
     //   postId: template.data._id
 
-        Comments.insert({
-            text: $commentText.val(),
-            date: 'on ' + moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a'),
-            activity: Session.get('activityId')
-        })
+    Meteor.call("createComment", $commentText.val(), moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a'), Session.get('activityId'), Meteor.userId());
+    //@TODO add user connection
     }
 });

@@ -30,19 +30,9 @@ if(Meteor.isClient) {
 			//   console.log(after);
 			//   console.log(beforebefore);
 	          if(!before && !removedFirst) {
-							TaskActivities.insert({
-					      description:'Work stopped', // rename this
-								user: Meteor.userId(),
-					      createdAt: Date.now(),
-								task: Blaze.getData(after)._id
-					    });
+							Meteor.call("createTaskActivity", 'Work stopped', Meteor.userId(), Date.now(), Blaze.getData(after)._id);
 
-							TaskActivities.insert({
-					      description:'Work being performed', // rename this
-								user: Meteor.userId(),
-					      createdAt: Date.now(),
-								task: Blaze.getData(el)._id
-					    });
+							Meteor.call("createTaskActivity", 'Work being performed', Meteor.userId(), Date.now(), Blaze.getData(el)._id);
 
 	            newRank = Blaze.getData(after).priority - 1
 
@@ -57,25 +47,14 @@ if(Meteor.isClient) {
 	            }
 
 				if(removedFirst){
-					TaskActivities.insert({
-						description:'Work stopped', // rename this
-						user: Meteor.userId(),
-						createdAt: Date.now(),
-						task: Blaze.getData(el)._id
-					});
+					Meteor.call("createTaskActivity", 'Work stopped', Meteor.userId(), Date.now(), Blaze.getData(el)._id);
 
-					TaskActivities.insert({
-						description:'Work being performed', // rename this
-						user: Meteor.userId(),
-						createdAt: Date.now(),
-						task: Blaze.getData($('#taskListDiv').children()[0])._id
-					});
-
+					Meteor.call("createTaskActivity", 'Work being performed', Meteor.userId(), Date.now(), Blaze.getData($('#taskListDiv').children()[0])._id);
 
 					removedFirst = false;
 				}
+					Meteor.call("updateTaskPriority",  Blaze.getData(el)._id, newRank);
 
-	          Tasks.update({_id: Blaze.getData(el)._id}, {$set: {priority: newRank}})
 	        }
 	    })
 			// this.$('#taskListDiv').sortable({
