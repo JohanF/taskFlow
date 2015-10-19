@@ -42,6 +42,7 @@ if (Tasks.find().count() === 0) {
 	        project: ""
   });
 }
+
 if(Chats.find().count() === 0) {
    //chat structure on creation
    Chats.insert({

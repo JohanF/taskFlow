@@ -28,6 +28,11 @@ loadChat = function(chatId) {
         _chatId: chatId
     });
 }
+//temp method for testing. remove later
+addUserToChats= function (){
+   if(Meteor.user())
+      Meteor.call("addUserToAllChats", Meteor.user()._id)
+}
 killWorld = function(){
 	Router.go("/killworld");
 }

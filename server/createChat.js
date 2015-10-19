@@ -9,8 +9,24 @@ Meteor.methods({
          messageHistory: []
  		});
 	},
-	addUserToChat: function(projectId, userId) {
+	addUserToChat: function(chatId, userId) {
 		console.log("unimplemented method for adding a person to the chat");
+	},
+	addUserToAllChats: function(userId){
+		Chats.find().forEach(function(chat) {
+			if(_.contains(chat.members, userId)){
+			}
+			else{
+    			Chats.update({_id: chat._id}, { $push: {members: userId}});
+			}
+		});
+
+		/*Chats.find().foreach(
+			Chats.update({_id: _id}, { $push: {members: userId}})
+		);*/
+		/*forEach( var chat in Chats.find()){
+			Chats.update({_id: chat._id}, { $push: {members: userId}});
+		/*/
 	},
 	postToChat: function(chatId, message){
 		var tempText = message.text.toString();

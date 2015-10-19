@@ -49,7 +49,7 @@
 </template>
 
 <template name="chatList">
-   <p style="color: white; padding-top: 7vh;"> - Chats -</p>
+   <p style="color: white; padding-top: 7vh; cursor: pointer;" onclick="addUserToChats()"> - Chats - (update)</p>
    {{#each chatList}}
        {{>chatName}}
    {{/each}}
