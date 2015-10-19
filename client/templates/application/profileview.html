@@ -1,3 +1,12 @@
 <template name= "profileview">
-	<p> cool user statistics</p>
+	<div class="animated flipInX profile-header">
+		<h2 class="profile-header-text"> Welcome to {{userName}}'s crib</h2>
+	</div>
+	<div class="profile-picture">
+		<h4>Change profile pic -  </h4> <a href="" onclick="showImageGallery()" class="profile-pic"> </a>
+		{{>imageGallery}}
+	</div>
+	<div class="other-info">
+		<h4>Edit other shiet</h4>
+	</div>
 </template>

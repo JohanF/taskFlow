@@ -47,14 +47,14 @@ if(Chats.find().count() === 0) {
    Chats.insert({
       title:      'Training chat',
       description: 'Here we chat about what to train',
-      members:    ['userId1', 'userId2', 'Etk4e8uZLnWzk8Sht'],
+      members:    ['dnTuiWp6D8DoXMTBk', 'userId2', 'Etk4e8uZLnWzk8Sht'],
       admin:      ['couldBeUsefulInTheFuture'],
       messageHistory: []
    });
    Chats.insert({
       title:      'Party chat',
       description: 'Here we party!',
-      members:    ['userId1', 'userId2', 'Etk4e8uZLnWzk8Sht'],
+      members:    ['dnTuiWp6D8DoXMTBk', 'userId2', 'Etk4e8uZLnWzk8Sht'],
       admin:      ['couldBeUsefulInTheFuture'],
       messageHistory: []
    });

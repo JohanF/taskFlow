@@ -38,7 +38,7 @@ Template.createProjectModal.events({
         $('#newProjectName').val('');
         $('#newProjectDescription').val('');
     },
-    'click #createGameName': function () {
+    'click #createProjectName': function () {
         var pName = $('#newProjectName').val();
         var pDesc = $('#newProjectDescription').val();
         console.log("pName: "+ pName+ " pDesc: "+ pDesc);

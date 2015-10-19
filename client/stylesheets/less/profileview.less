@@ -1,0 +1,81 @@
+.profile-header{
+   margin-left: 30vw;
+   margin-right: 5vw;
+}
+
+.profile-header-text{
+   font-size: 3.5rem;
+}
+.profile-picture{
+   margin-left: 3vw;
+   margin-top: 10vh;
+
+   .profile-pic{
+     position: absolute;
+     left: 15vw;
+     top: 13vh;
+     display: block;
+     -moz-border-radius: 0.2rem;
+     -webkit-border-radius: 0.2rem;
+     border-radius: 0.2rem;
+
+     width: 72px;
+     height: 72px;
+     background-image: url("/img/kungfu-Minion.png");
+     background-size: cover;
+   }
+}
+
+.other-info{
+   margin-left: 3vw;
+   margin-top: 5vh;
+}
+
+
+
+//animations
+.animated {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+}
+
+@-webkit-keyframes flipInX {
+    0% {
+        -webkit-transform: perspective(400px) rotateX(90deg);
+        opacity: 0;
+    }
+    40% {
+        -webkit-transform: perspective(400px) rotateX(-10deg);
+    }
+    70% {
+        -webkit-transform: perspective(400px) rotateX(10deg);
+    }
+    100% {
+        -webkit-transform: perspective(400px) rotateX(0deg);
+        opacity: 1;
+    }
+}
+@keyframes flipInX {
+    0% {
+        transform: perspective(400px) rotateX(90deg);
+        opacity: 0;
+    }
+    40% {
+        transform: perspective(400px) rotateX(-10deg);
+    }
+    70% {
+        transform: perspective(400px) rotateX(10deg);
+    }
+    100% {
+        transform: perspective(400px) rotateX(0deg);
+        opacity: 1;
+    }
+}
+.flipInX {
+    -webkit-backface-visibility: visible !important;
+    -webkit-animation-name: flipInX;
+    backface-visibility: visible !important;
+    animation-name: flipInX;
+}

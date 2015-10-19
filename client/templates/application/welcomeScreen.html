@@ -1,6 +1,6 @@
 <template name="welcomeScreen">
 	<div class="jumbotron container-fluid main-container" style="padding-top: 0%;">
-		<h1> 
+		<h1>
 			{{>notLoggedIn}}
 			{{>loggedIn}}
 		</h1>
@@ -8,21 +8,21 @@
 	</div>
 </template>
 
-<template name="notLoggedIn"> 
+<template name="notLoggedIn">
     <div id="notLoggedInText" style="text-align: center; hide=true;">
         <h3>Welcome to TaskFlow</h3>
         <p>Log in to get the flow going</p>
     </div>
 </template>
 
-<template name="loggedIn"> 
+<template name="loggedIn">
     <div id="loggedInText" style="text-align: center; hide=true;">
         <h3>Welcome back user</h3>
-        <p>Here is an overview of your projects: </p>  
+        <p>Here is an overview of your projects: </p>
     </div>
-    <div id="projectSpace col-md-12" style="text-align: center; hide=true;"> 
+    <div id="projectSpace col-md-12" style="text-align: center; hide=true;">
         {{#each projectList}}
-            {{>projectCard}}    
+            {{>projectCard}}
         {{/each}}
     </div>
     <div>
