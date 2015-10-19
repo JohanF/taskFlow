@@ -80,3 +80,18 @@ if (Projects.find().count() === 0) {
 	creator: "dnTuiWp6D8DoXMTBk"
   });
 }
+
+if (Comments.find().count() === 0){
+    Comments.insert({
+      text: 'Hello this is a test comment.',
+      date: 'on March 5th, 2014'
+    });
+    Comments.insert({
+      text: 'Hello this is a test comment and this comment is particularly very long and it goes on and on and on.',
+      date: 'on March 5th, 2014'
+    });
+    Comments.insert({
+      text: 'Hello this is a test comment.',
+      date: 'on March 5th, 2014'
+    });
+}

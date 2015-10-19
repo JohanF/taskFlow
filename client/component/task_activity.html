@@ -5,7 +5,7 @@
 			User: {{activityOwner}}
 
 				<div class="rowzzz">
-					<div class="column-activitytaskview"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#demo">0 Comments
+					<div id="commentButton" class="column-activitytaskview"><button type="button" class="btn btn-link" data-toggle="collapse" data-target="#{{activityId}}">{{commentAmount}} Comments
 					</button></div>
 
 
@@ -13,7 +13,7 @@
 
 					<div class="column-activitytaskview"><p class="date">{{activityDate}}</p></div>
 				</div>
-				<div id="demo" class="collapse" style="margin-top: 35px">
+				<div id={{activityId}} class="collapse" style="margin-top: 35px">
 				  {{> activityComments}}
 				</div>
 	  		</div></div>
