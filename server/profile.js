@@ -2,7 +2,12 @@
 Meteor.methods({
    getImageFilesInProfileFolder: function() {
        var fs = Npm.require('fs');
-       var files = fs.readdirSync('../../../../../public/img/profile-pics/');
+       if(process.env.NODE_ENV === "production"){
+         var files = fs.readdirSync('/img/profile-pics/');
+       }
+       else{
+         var files = fs.readdirSync('../../../../../public/img/profile-pics/');
+       }
 
        var cleanedUpFiles = _(files).reject( function(fileName) {
            return fileName.indexOf('.png') < 0;
@@ -11,3 +16,4 @@ Meteor.methods({
 
    }
 });
+// var files = fs.readdirSync('../../../../../public/img/profile-pics/');
