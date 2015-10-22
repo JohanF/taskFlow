@@ -1,3 +1,15 @@
+Template.sideBar.rendered = function() {
+   this.autorun(function(){
+       if(Meteor.userId()){
+
+           if(Meteor.user().profile == undefined){
+              Meteor.call("updateUserImage", Meteor.user()._id, "kungfu-panda.png")
+           }
+       }
+   });
+
+}
+
 Template.sideBar.helpers({
    userName: function() {
       if(Meteor.user()){

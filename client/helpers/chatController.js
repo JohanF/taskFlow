@@ -24,7 +24,7 @@ Template.entry.events({
             var msg= {  user: Meteor.user().username,
                         timestamp: '',
                         text: $('.chat-input-text').val(),
-                        profilePic:''
+                        profilePic: Meteor.user().profile.pic
                      };
             Meteor.call("postToChat", chatData._id, msg);
             if(msg.text == 'ClearChat'){
@@ -33,7 +33,7 @@ Template.entry.events({
             }
             //empty input container
             $('.chat-input-text').val("");
-            $('.container-fluid').scrollTop( $('.chat-div').prop("scrollHeight") );
+            $('.container-fluid').scrollTop( $('.chat-div').prop("scrollHeight"));
         }
     }
 });
@@ -49,11 +49,12 @@ Template.messages.helpers({
    }
 });
 Template.message.helpers({
-   profilePic: function() {
+   profilePicX: function() {
       if(Meteor.user().profile.pic != undefined){
          return Meteor.user().profile.pic;
-      }else{
-         return "/img/profile-pic/kungfu-Minion.png";
+      }
+      else{
+         console.log("error: 'profile pic is undefined' - please inform your friendly neighbourhood administrators")
       }
    }
 });

@@ -8,11 +8,12 @@ Template.profileview.helpers({
       }
    },
    profilePic: function() {
-      if(Meteor.user().profile.pic != undefined){
-         console.log("found profilePic")
-         return Meteor.user().profile.pic;
-      }else{
-         return "/img/profile-pic/kungfu-Minion.png";
+      if(Meteor.user()){//for now, wont be visible later on
+         if(Meteor.user().profile != undefined){
+            return Meteor.user().profile.pic;
+         }else{
+            return "/img/profile-pic/kungfu-Minion.png";
+         }
       }
    }
 });
@@ -24,17 +25,12 @@ Template.imageGallery.helpers({
 Template.profileview.rendered = function() {
     $("#createImageModal").hide();
 
-    //try loading img url's from frontend?
-
-    //load img urls
     Meteor.call("getImageFilesInProfileFolder", function(err, data){
       if(err){
           console.log("----- :((( error in imageGallery: ")
           console.log(err);
       }
       else{
-         console.log("SUCCESS - got urls! - SUCCESS")
-         console.log(data);
       }
       Session.set("images",data)
    });
@@ -44,9 +40,7 @@ Template.imageGallery.events({
     'click #closeImageModal': function () {
        //close modal
         $("#createImageModal").hide();
-
     },
-
 });
 
 
@@ -54,5 +48,7 @@ showImageGallery = function() {
     $("#createImageModal").show();
 }
 selectNewProfilePic = function(data) {
-    Meteor.call("updateUserImage", Meteor.user()._id, data);
+   Meteor.call("updateUserImage", Meteor.user()._id, data);
+   $("#createImageModal").hide();
+
 }

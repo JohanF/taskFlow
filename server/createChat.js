@@ -12,6 +12,10 @@ Meteor.methods({
 	addUserToChat: function(chatId, userId) {
 		console.log("unimplemented method for adding a person to the chat");
 	},
+	getUserProfilePicture: function(userId) {
+		console.log(Meteor.users.findOne(userId).profile.pic);
+		return Meteor.users.findOne(userId).profile.pic;
+	},
 	addUserToAllChats: function(userId){
 		Chats.find().forEach(function(chat) {
 			if(_.contains(chat.members, userId)){
