@@ -15,3 +15,6 @@ fortawesome:fontawesome
 twbs:bootstrap
 mrt:jquery-ui
 momentjs:moment
+cfs:standard-packages
+cfs:gridfs
+cfs:filesystem
