@@ -22,6 +22,8 @@ Template.imageGallery.helpers({
       return Session.get("images");
    }
 });
+
+
 Template.profileview.rendered = function() {
     $("#createImageModal").hide();
 
@@ -31,8 +33,13 @@ Template.profileview.rendered = function() {
           console.log(err);
       }
       else{
+         Session.set("images",data)
       }
-      Session.set("images",data)
+   });
+   this.autorun(function(){
+     if(!Meteor.userId()){
+          Router.go("/");
+     }
    });
 }
 

@@ -1,3 +1,11 @@
+Template.chatview.rendered = function() {
+     this.autorun(function(){
+        if(!Meteor.userId()){
+            Router.go("/");
+        }
+     });
+}
+
 Template.chatview.helpers({
    chatName: function() {
       if(Chats.findOne(chatData._id) != undefined ){
