@@ -36,20 +36,23 @@
 	    </div>
 	  </div>
 </template>
+
 <template name="sideBar">
    <div class="sidebar-header">
       <h4 class="sidebar-user-header" style="cursor: pointer;" onclick="goHome()">{{userName}}</h4>
    </div>
 	<div class="sidebar-content">
-	 <p style="color: white; cursor: pointer;" onclick="goHome()">Home</p>
-	 <p style="color: white; cursor: pointer;" onclick="loadProfile()">Profile</p>
-	 <p style="color: white; cursor: pointer;">Don't click me</p>
-    {{> chatList}}
+      	 <p style="color: white; cursor: pointer;" onclick="goHome()">Home</p>
+      {{#if isUserLoggedIn}}
+      	 <p style="color: white; cursor: pointer;" onclick="loadProfile()">Profile</p>
+      	 <p style="color: white; cursor: pointer;">Don't click me</p>
+          {{> chatList}}
+      {{/if}}
 	</div>
 </template>
 
 <template name="chatList">
-   <p style="color: white; padding-top: 7vh; cursor: pointer;" onclick="addUserToChats()"> - Chats - (update)</p>
+   <p style="color: white; padding-top: 7vh; cursor: pointer;" onclick="addUserToChats()"> - Chats - </p>
    {{#each chatList}}
        {{>chatName}}
    {{/each}}

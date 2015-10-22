@@ -1,4 +1,3 @@
-
 Template.welcomeScreen.rendered = function() {
     this.autorun(function(){
         if(Meteor.userId()){
@@ -14,6 +13,11 @@ Template.welcomeScreen.rendered = function() {
 
     });
 }
+Template.welcomeScreen.helpers({
+   isUserLoggedIn: function() {
+      if(Meteor.user()){ return true; } else{ return false; }
+   }
+});
 
 Template.loggedIn.helpers({
     projectList: function() {

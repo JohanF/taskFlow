@@ -1,10 +1,11 @@
 <template name="welcomeScreen">
 	<div class="jumbotron container-fluid main-container" style="padding-top: 0%;">
-		<h1>
-			{{>notLoggedIn}}
-			{{>loggedIn}}
-		</h1>
-        {{>createProjectModal}}
+			{{#if isUserLoggedIn}}
+				<h1>{{>loggedIn}}</h1>
+        		{{>createProjectModal}}
+    		{{else}}
+				{{>notLoggedIn}}
+    		{{/if}}
 	</div>
 </template>
 
