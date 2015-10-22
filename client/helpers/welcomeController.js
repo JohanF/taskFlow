@@ -50,6 +50,7 @@ Template.createProjectModal.events({
 });
 
 navigateProject = function(projectId) {
+    Session.set('selectedProject', projectId);
     Router.go("projectview", {
         _projectId: projectId
     });

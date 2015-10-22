@@ -1,19 +1,30 @@
 <template name="projectview">
 
-	   <div class="project-header-column project-header-column-activebg"> 
-				<h1> 	
+	   <div class="project-header-column project-header-column-activebg">
+				<h1>
 					Welcome to the projectview.
 				</h1>
+				<form role="form">
+					<div class="form-group">
+						<label for="name-text">Task Name:</label>
+						<input type="text" class="form-control" id="name-text">
+					</div>
+					<div class="form-group">
+						<label for="description-text">Task Description:</label>
+						<input type="text" class="form-control" id="description-text">
+					</div>
+						<button type="submit" class="btn btn-default">Submit</button>
+				</form>
 
 		</div>
-		
+
         {{>taskModal}}
 	<div class="rowzzz">
-		<div class="project-content-column project-content-column-activebg"> 
-	      			{{> tasksList}} 
+		<div class="project-content-column project-content-column-activebg">
+	      			{{> tasksList}}
 		</div>
-		<div class="project-content-column project-content-column-sleepinbg"> 
+		<div class="project-content-column project-content-column-sleepinbg">
 					{{> activeTasksList}}
-		</div>	
+		</div>
 	</div>
 </template>
