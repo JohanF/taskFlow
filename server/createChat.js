@@ -54,6 +54,11 @@ Meteor.methods({
 
 	clearChat: function(chatId){
 		Chats.update({_id: chatId}, { $set : {'messageHistory': [] }} , {multi:true} );
+	},
+	chatWasUpdated: function(chatId){
+		tChat = Chats.findOne(chatId);
+
+
 	}
 
 });

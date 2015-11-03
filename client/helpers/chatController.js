@@ -1,7 +1,14 @@
 Template.chatview.rendered = function() {
+     //on render scroll down!
+     $('.container-fluid').scrollTop( $('.chat-div').prop("scrollHeight"));
+     Session.set('scrollHeight', $('.chat-div').prop("scrollHeight"));
      this.autorun(function(){
         if(!Meteor.userId()){
             Router.go("/");
+        }
+        else if(Session.get("scrollHeight") != $('.chat-div').prop("scrollHeight")){
+            Session.set('scrollHeight', $('.chat-div').prop("scrollHeight"));
+            $('.container-fluid').scrollTop( $('.chat-div').prop("scrollHeight"));
         }
      });
 }
