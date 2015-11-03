@@ -1,9 +1,10 @@
 <template name="chatview">
 	<div class="chat-primary">
+		{{>chatsettings}}
 		<div class = "chat-header-div">
 			<div class="l-chat">{{chatName}}</div>
 			 <div class="m-chat">{{chatDescription}}</div>
-			 <div class="r-chat"><a href="" class="settings-icon"></a></div>
+			 <div class="r-chat"><a href="" class="settings-icon" onclick="loadChatSettings()"></a></div>
 		</div>
 		<div class="chat-div container-fluid">
 			{{> messages}}

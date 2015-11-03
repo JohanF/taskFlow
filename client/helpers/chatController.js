@@ -66,3 +66,28 @@ Template.message.helpers({
       }
    }
 });
+
+loadChatSettings = function(){
+	console.log("show settings")
+    $("#chatSettingsModal").show();
+}
+
+Template.chatsettings.rendered = function() {
+    $("#chatSettingsModal").hide();
+}
+
+Template.chatsettings.events({
+    'click #closeChatSettings': function () {
+       //close modal
+        $("#chatSettingsModal").hide();
+        $('#chatName').val('');
+        $('#chatDescription').val('');
+    },
+    'click #saveChatSettings': function () {
+        var pName = $('#chatName').val();
+        var pDesc = $('#chatDescription').val();
+        $("#chatSettingsModal").hide();
+        $('#chatName').val('');
+        $('#chatDescription').val('');
+    },
+});

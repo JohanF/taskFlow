@@ -1,0 +1,26 @@
+<Template name="chatsettings">
+   <div class="overlay" id="chatSettingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close hide-modal" id="closeChatSettings" data-dismiss="modal" aria-hidden="false">&times;</button>
+                   <h3 class="modal-title">Settings</h3>
+               </div>
+               <div class="modal-body">
+                       <div class="form-group">
+                           <label for="Name">Chat name:</label>
+                           <input name="Name" id="chatName"/>
+                       </div>
+                       <div class="form-group">
+                           <label for="Description">Chat description:</label>
+                           <input name="Description" id="chatDescription"/>
+                       </div>
+               </div>
+               <div class="modal-footer">
+                   <button class="col-md-4 col-md-offset-4 btn  btn-lg" id="saveChatSettings">OK</button>
+               </div>
+           </div>
+       </div>
+  </div>
+
+</Template>
