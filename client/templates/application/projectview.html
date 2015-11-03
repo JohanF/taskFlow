@@ -13,11 +13,12 @@
 						<label for="description-text">Task Description:</label>
 						<input type="text" class="form-control" id="description-text">
 					</div>
+						<label for="user-text">Task Users:</label>{{> addTaskUsers}}<br>
+						{{ > searchBox}}
 						<button type="submit" class="btn btn-default">Submit</button>
 				</form>
 				<br>
 				<br>
-				{{ > searchBox}}
 
 		</div>
 
@@ -36,6 +37,6 @@
 	<label>User Search:</label> <br>
 	{{> esInput index="users" placeholder="Search..." }}
 	<ul>{{#esEach index="users"}}
-			<li>Name of the User: {{username}}</li>
+			<li>{{username}} <button id="userSubmitButton" type="button" class="btn btn-primary" data-info={{_id}}>Add to task</button></li>
 		{{/esEach}}</ul>
 </template>

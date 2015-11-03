@@ -8,7 +8,14 @@ Template.projectview.events({
     $('#name-text').val("");
     $('#description-text').val("");
 
-    Meteor.call("createTask", $nameText, $descriptionText, Session.get('selectedProject'), Meteor.userId());
+    var taskUsers = [];
+
+
+    Meteor.call("createTask", $nameText, $descriptionText, Session.get('selectedProject'), _.pluck(AddTaskUsers.find({}, {fields: {'_id':0}}).fetch(), 'uid'));
+    Meteor.call('clearTaskUsers');
     //@TODO add user connection
+    },
+    'click #userSubmitButton': function() {
+    Meteor.call("addTaskUser", this._id);
     }
 });

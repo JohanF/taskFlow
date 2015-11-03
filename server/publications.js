@@ -13,3 +13,6 @@ Meteor.publish("chats", function () {
 Meteor.publish("comments", function () {
   return Comments.find();
 });
+Meteor.publish("addtaskusers", function () {
+  return AddTaskUsers.find();
+});

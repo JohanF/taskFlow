@@ -15,6 +15,7 @@ if(Chats.find().count() === 0) {
       messageHistory: []
    });
 }
+
 if (Projects.find().count() === 0) {
 
   Projects.insert({
