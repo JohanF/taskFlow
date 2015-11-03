@@ -1,9 +1,11 @@
 <template name="projectview">
-
+		{{>projectviewsettings}}
 	   <div class="project-header-column project-header-column-activebg">
-				<h1>
-					Welcome to the projectview.
-				</h1>
+			 <div class = "projectview-header-div">
+				 <div class="l-projectview-header"><h1>ProjectView</h1></div>
+					<div class="m-projectview-header"></div>
+					<div class="r-projectview-header"><a href="" class="settings-icon" onclick="loadProjectSettings()"></a></div>
+				</div>
 				<form role="form">
 					<div class="form-group">
 						<label for="name-text">Task Name:</label>

@@ -16,3 +16,16 @@ Meteor.publish("comments", function () {
 Meteor.publish("addtaskusers", function () {
   return AddTaskUsers.find();
 });
+
+Meteor.publish('projectSearchResults', function(query){
+    if(query){
+        var self = this;
+        var searchUsers = Meteor.users.find({"username": /.*query.*/})
+        searchUsers.forEach(function(doc){
+            self.added('search_collection', doc._id, doc.username);
+        });
+        this.ready();
+    } else {
+        this.ready();
+    }
+});
