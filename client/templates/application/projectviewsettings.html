@@ -1,0 +1,37 @@
+<Template name="projectviewsettings">
+   <div class="overlay" id="projectSettingsModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close hide-modal" id="closeProjectSettings" data-dismiss="modal" aria-hidden="false">&times;</button>
+                   <h3 class="modal-title">Settings</h3>
+               </div>
+               <div class="project-modal-body">
+                       <div class="form-group">
+                           <label for="Name">Project name:</label>
+                           <input name="Name" id="projectName"/>
+                       </div>
+                       <div class="form-group">
+                           <label for="Description">Project description:</label>
+                           <input name="Description" id="projectDescription"/>
+                       </div>
+											 <div class="form-group">
+												 {{>projectUserSearchbox}}
+											 </div>
+               </div>
+               <div class="modal-footer">
+                   <button class="col-md-4 col-md-offset-4 btn  btn-lg" id="saveProjectSettings">OK</button>
+               </div>
+           </div>
+       </div>
+  </div>
+
+</Template>
+
+<template name="projectUserSearchbox">
+ <label>User Search:</label> <br>
+ {{> esInput index="users" placeholder="Search..." }}
+ <ul>{{#esEach index="users"}}
+		 <li>{{username}} <button id="projectUserSubmitButton" type="button" class="btn btn-primary" data-info={{_id}}>Add to task</button></li>
+	 {{/esEach}}</ul>
+</template>
