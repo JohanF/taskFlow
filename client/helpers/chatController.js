@@ -82,23 +82,31 @@ loadAddUserToChat = function(){
 	console.log("show add user")
     $("#addUserToChatModal").show();
     Session.set("chatSearchResults", []);
-
 }
-
+selectUserToAdd = function(usr){
+   console.log(typeof(usr));
+   console.log(usr);
+}
 Template.searchchatuser.events({
-  'keypress input': function(event) {
+  'keyup input': function(event) {
          //search for user here.
-         var text = $('.user-search').val()+String.fromCharCode(event.keyCode);
-         console.log(text);
-         Meteor.call("searchAllUsers", text, function(error, result){
-           if(error){
-             console.log(error);
-             console.log(error.reason);
-             return;
-           }
-           console.log(result)
-           Session.set("chatSearchResults", result);
-         });
+         if($('.user-search').val() !=""){
+
+            var text = $('.user-search').val();//+String.fromCharCode(event.keyCode);
+            console.log(text);
+            Meteor.call("searchAllUsers", text, function(error, result){
+              if(error){
+                console.log(error);
+                console.log(error.reason);
+                return;
+              }
+              console.log(result)
+              Session.set("chatSearchResults", result);
+            });
+         }
+         else{
+            Session.set("chatSearchResults", []);
+         }
          //Session.set("searchResults", Meteor.call("searchAllUsers", text))
 
     }
