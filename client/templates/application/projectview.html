@@ -16,8 +16,14 @@
 						<input type="text" class="form-control" id="description-text">
 					</div>
 						<label for="user-text">Task Users:</label>{{> addTaskUsers}}<br>
-						{{ > searchBox}}
-						<button type="submit" class="btn btn-default">Submit</button>
+						<div class="user-search-input-div">
+							 {{>searchprojectuser}}
+						</div>
+						<div class="user-search-result-div">
+							 {{#each projectSearchResults}}
+									 {{>projectsearchresultobject}}
+							 {{/each}}
+						</div>
 				</form>
 				<br>
 				<br>
@@ -35,10 +41,11 @@
 	</div>
 </template>
 
-<template name="searchBox">
-	<label>User Search:</label> <br>
-	{{> esInput index="users" placeholder="Search..." }}
-	<ul>{{#esEach index="users"}}
-			<li>{{username}} <button id="userSubmitButton" type="button" class="btn btn-primary" data-info={{_id}}>Add to task</button></li>
-		{{/esEach}}</ul>
-</template>
+<Template name="searchprojectuser">
+   <input type="text" class="project-user-search" placeholder="Search...">
+</Template>
+
+
+<Template name="projectsearchresultobject">
+   <p class="user-search-result">{{username}} <button id="userSubmitButton" type="button" class="btn btn-primary" data-info={{_id}}>Add to task</button></p>
+</Template>

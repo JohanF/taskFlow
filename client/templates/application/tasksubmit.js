@@ -16,6 +16,6 @@ Template.projectview.events({
     //@TODO add user connection
     },
     'click #userSubmitButton': function() {
-    Meteor.call("addTaskUser", this._id);
+    Meteor.call("addTaskUser", this._id, this.username);
     }
 });
