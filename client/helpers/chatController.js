@@ -78,7 +78,53 @@ loadChatSettings = function(){
 	console.log("show settings")
     $("#chatSettingsModal").show();
 }
+loadAddUserToChat = function(){
+	console.log("show add user")
+    $("#addUserToChatModal").show();
+    Session.set("chatSearchResults", []);
 
+}
+
+Template.searchchatuser.events({
+  'keypress input': function(event) {
+         //search for user here.
+         var text = $('.user-search').val()+String.fromCharCode(event.keyCode);
+         console.log(text);
+         Meteor.call("searchAllUsers", text, function(error, result){
+           if(error){
+             console.log(error);
+             console.log(error.reason);
+             return;
+           }
+           console.log(result)
+           Session.set("chatSearchResults", result);
+         });
+         //Session.set("searchResults", Meteor.call("searchAllUsers", text))
+
+    }
+});
+Template.addusertochat.helpers({
+   searchResults: function() {
+      console.log("autosearch");
+      return Session.get("chatSearchResults");
+      //return Meteor.call("searchAllUsers", $('.user-search').val());
+         //display search results from here instead
+   }
+});
+Template.addusertochat.rendered = function() {
+    $("#addUserToChatModal").hide();
+}
+Template.addusertochat.events({
+    'click #closeAddUserToChat': function () {
+       //close modal
+       console.log("vlosing");
+        $("#addUserToChatModal").hide();
+    },
+    'click #addUserToChat': function () {
+        console.log("ok")
+        $("#addUserToChatModal").hide();
+    },
+});
 Template.chatsettings.rendered = function() {
     $("#chatSettingsModal").hide();
 }

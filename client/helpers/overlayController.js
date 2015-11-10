@@ -1,11 +1,6 @@
 Template.sideBar.rendered = function() {
-   console.log("sidebar")
    this.autorun(function(){
-      console.log("sidebar2")
-
        if(Meteor.user()){
-          console.log("sidebar3")
-
            if(Meteor.user().profile == undefined){
              console.log("sidebar4")
 
