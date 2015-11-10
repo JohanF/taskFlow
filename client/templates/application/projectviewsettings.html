@@ -16,7 +16,14 @@
                            <input name="Description" id="projectDescription"/>
                        </div>
 											 <div class="form-group">
-												 {{>projectUserSearchbox}}
+                         <div class="user-search-input-div">
+                            {{>searchprojectsettinguser}}
+                         </div>
+                         <div class="user-search-result-div">
+                            {{#each projectSettingSearchResults}}
+                                {{>searchrojectsettingresultobject}}
+                            {{/each}}
+                         </div>
 											 </div>
                </div>
                <div class="modal-footer">
@@ -28,10 +35,10 @@
 
 </Template>
 
-<template name="projectUserSearchbox">
- <label>User Search:</label> <br>
- {{> esInput index="users" placeholder="Search..." }}
- <ul>{{#esEach index="users"}}
-		 <li>{{username}} <button id="projectUserSubmitButton" type="button" class="btn btn-primary" data-info={{_id}}>Add to task</button></li>
-	 {{/esEach}}</ul>
-</template>
+<Template name="searchrojectsettingresultobject">
+   <p class="user-search-result">{{username}} <button id="projectUserSubmitButton" type="button" class="btn btn-primary" data-info={{_id}}>Add to project</button></p>
+</Template>
+
+<Template name="searchprojectsettinguser">
+   <input type="text" class="user-search" placeholder="Search...">
+</Template>

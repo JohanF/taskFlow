@@ -1,6 +1,5 @@
 Meteor.methods({
-	addProjectUser: function(userId) {
-		console.log("add PROJECT user");
-		//@TODO add
+	addProjectUser: function(pid, userId) {
+		Projects.update({ _id: pid},{ $push: { members: userId }});
 	}
 });
