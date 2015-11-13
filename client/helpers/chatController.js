@@ -75,32 +75,45 @@ Template.message.helpers({
 });
 
 loadChatSettings = function(){
-	console.log("show settings")
     $("#chatSettingsModal").show();
 }
 loadAddUserToChat = function(){
-	console.log("show add user")
     $("#addUserToChatModal").show();
     Session.set("chatSearchResults", []);
+    Session.set("selectedUsers", [])
 }
-selectUserToAdd = function(usr){
-   console.log(typeof(usr));
-   console.log(usr);
+selectUserToAdd = function(id){
+   console.log(typeof(id));
+   console.log(id);
+   var tempList = Session.get("selectedUsers");
+   if($.inArray(id, tempList)){
+
+   }else{
+      tempList.add(id);
+      Session.set("selectedUsers", tempList);
+   }
 }
+hasBorder = function(id){
+	console.log("canhazborder? PLEASE CALL ME")
+   if( $inArray( id, Session.get("selectedUsers"))) {
+      console.log("hadborder!!!")
+      return "groovy"
+   }
+   return "none"
+}
+
+
 Template.searchchatuser.events({
   'keyup input': function(event) {
          //search for user here.
          if($('.user-search').val() !=""){
 
             var text = $('.user-search').val();//+String.fromCharCode(event.keyCode);
-            console.log(text);
             Meteor.call("searchAllUsers", text, function(error, result){
               if(error){
-                console.log(error);
                 console.log(error.reason);
                 return;
               }
-              console.log(result)
               Session.set("chatSearchResults", result);
             });
          }
@@ -113,10 +126,7 @@ Template.searchchatuser.events({
 });
 Template.addusertochat.helpers({
    searchResults: function() {
-      console.log("autosearch");
       return Session.get("chatSearchResults");
-      //return Meteor.call("searchAllUsers", $('.user-search').val());
-         //display search results from here instead
    }
 });
 Template.addusertochat.rendered = function() {
