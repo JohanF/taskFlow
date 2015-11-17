@@ -1,4 +1,13 @@
 Meteor.methods({
+	getMembersInChat: function(chatId) {
+		var chatUsers = [];
+		Chats.findOne(chatId).members.forEach(function(user) {
+			if(Meteor.users.findOne(user) != undefined){
+				chatUsers.push(Meteor.users.findOne(user).username);
+			}
+		});
+		return chatUsers;
+	},
 	createChat: function(title, description, userId) {
 		console.log("creating project");
 		Chats.insert({

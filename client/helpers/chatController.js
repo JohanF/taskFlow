@@ -153,3 +153,17 @@ Template.chatsettings.events({
         $('#chatDescription').val('');
     },
 });
+Template.chatmembers.rendered = function(){
+   Meteor.call("getMembersInChat", chatData._id, function(error, result){
+     if(error){
+       console.log(error.reason);
+     }
+     Session.set("membersInChat", result);
+   });
+}
+
+Template.chatmembers.helpers({
+   chatMembers: function() {
+      return Session.get("membersInChat");
+   }
+});

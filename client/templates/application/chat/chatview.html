@@ -11,14 +11,29 @@
 				 <a href="" class="settings-icon" onclick="loadChatSettings()"></a>
 			 </div>
 		</div>
-		<div class="chat-div container-fluid">
-			{{> messages}}
-		</div>
-		<div class ="chat-input-div">
-			{{> entry}}
+		<div class="chat-center-content">
+			<div class="chat-content-left">
+				<div class="chat-div container-fluid">
+					{{> messages}}
+				</div>
+				<div class ="chat-input-div">
+					{{> entry}}
+				</div>
+			</div>
+			<div class="chat-content-right">
+				<p>Peoples:</p>
+				{{> chatmembers}}
+			</div>
 		</div>
 	</div>
 </template>
+
+<template name ="chatmembers">
+{{#each chatMembers}}
+	<p>{{this}}</p>
+{{/each}}
+</template>
+
 
 <template name="messages">
 	{{#each messageHistory}}
