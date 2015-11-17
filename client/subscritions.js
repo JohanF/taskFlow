@@ -4,3 +4,4 @@
   Meteor.subscribe("chats");
   Meteor.subscribe("comments");
   Meteor.subscribe("addtaskusers");
+  Meteor.subscribe("users");

@@ -6,6 +6,7 @@
 					<div class="m-projectview-header"></div>
 					<div class="r-projectview-header"><a href="" class="settings-icon" onclick="loadProjectSettings()"></a></div>
 				</div>
+				  {{> vis}}
 				<form role="form">
 					<div class="form-group">
 						<label for="name-text">Task Name:</label>
@@ -50,3 +51,7 @@
 <Template name="projectsearchresultobject">
    <p class="user-search-result">{{username}} <button id="userSubmitButton" type="button" class="btn btn-primary" data-info={{_id}}>Add to task</button></p>
 </Template>
+
+<template name="vis">
+  <div id="circles"></div>
+</template>
