@@ -16,6 +16,15 @@ Meteor.methods({
 		console.log(Meteor.users.findOne(userId).profile.pic);
 		return Meteor.users.findOne(userId).profile.pic;
 	},
+	addUserToChat: function(userId, chatId){
+		if(_.contains(Chats.findOne(chatId).members, userId)){
+			console.log("was already in chat! :()")
+		}
+		else{
+			Chats.update({_id: chatId}, { $push: {members: userId}});
+		}
+		//if not in chat, add to chat
+	},
 	addUserToAllChats: function(userId){
 		Chats.find().forEach(function(chat) {
 			if(_.contains(chat.members, userId)){

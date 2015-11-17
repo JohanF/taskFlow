@@ -80,27 +80,18 @@ loadChatSettings = function(){
 loadAddUserToChat = function(){
     $("#addUserToChatModal").show();
     Session.set("chatSearchResults", []);
-    Session.set("selectedUsers", [])
 }
 selectUserToAdd = function(id){
-   console.log(typeof(id));
    console.log(id);
-   var tempList = Session.get("selectedUsers");
-   if($.inArray(id, tempList)){
+   Meteor.call("addUserToChat", id, chatData._id, function(error, result){
+     if(error){
+      console.log(error.reason);
+      return;
+     }
+   });
+   $("#addUserToChatModal").hide();
+}
 
-   }else{
-      tempList.add(id);
-      Session.set("selectedUsers", tempList);
-   }
-}
-hasBorder = function(id){
-	console.log("canhazborder? PLEASE CALL ME")
-   if( $inArray( id, Session.get("selectedUsers"))) {
-      console.log("hadborder!!!")
-      return "groovy"
-   }
-   return "none"
-}
 
 
 Template.searchchatuser.events({
@@ -109,7 +100,7 @@ Template.searchchatuser.events({
          if($('.user-search').val() !=""){
 
             var text = $('.user-search').val();//+String.fromCharCode(event.keyCode);
-            Meteor.call("searchAllUsers", text, function(error, result){
+            Meteor.call("searchAllUsersNotInChat", text, chatData._id, function(error, result){
               if(error){
                 console.log(error.reason);
                 return;

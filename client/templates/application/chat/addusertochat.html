@@ -6,7 +6,7 @@
                    <button type="button" class="close hide-modal" id="closeAddUserToChat" data-dismiss="modal" aria-hidden="false">&times;</button>
                    <h3 class="modal-title">Feeling lonely?</h3>
                </div>
-               <div class="modal-body">
+               <div class="modal-body au-body">
                   <div class="user-search-input-div">
                      {{>searchchatuser}}
                   </div>
@@ -17,16 +17,14 @@
                   </div>
 
                </div>
-               <div class="modal-footer">
-                   <button class="col-md-4 col-md-offset-4 btn  btn-lg" id="addUserToChat">Add user</button>
-               </div>
+
            </div>
        </div>
   </div>
 </Template>
 
 <Template name="searchresultobject">
-   <p class="user-search-result" style="border-style: hasBorder('{{_id}}')" onclick="selectUserToAdd('{{_id}}')">{{username}}</p>
+   <p class="user-search-result" onclick="selectUserToAdd('{{_id}}')">{{username}}</p>
 </Template>
 
 <Template name="searchchatuser">
