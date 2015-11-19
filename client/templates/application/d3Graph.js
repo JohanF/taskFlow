@@ -3,10 +3,6 @@ Template.vis.rendered = function () {
 
     var color = d3.scale.category20();
 
-    var nodes = [
-    { x:   width/3, y: height/2 },
-    { x: 2*width/3, y: height/2 }
-    ];
 
     var links = [
     { source: 0, target: 1 }
@@ -16,11 +12,7 @@ Template.vis.rendered = function () {
       .attr('width', width)
       .attr('height', height);
 
-    var force = d3.layout.force()
-        .charge(-120)
-        .size([width, height])
-        .nodes(nodes)
-        .links(links);
+
 
     force.linkDistance(width/2);
 
@@ -29,10 +21,34 @@ Template.vis.rendered = function () {
     .enter().append('line')
     .attr('class', 'link');
 
-    var node = svg.selectAll('.node')
-    .data(nodes)
-    .enter().append('circle')
-    .attr('class', 'node');
+
+
+    var drawNodes = function () {
+      var data = _.map(Tasks.find({project:Session.get('selectedProject')}).fetch(), function(task){ return 10;});
+      var node = svg.selectAll('.node')
+      .data(data)
+      .enter().append('circle')
+      .attr('cx', function (d, i) { return x(i); })
+      .attr('cy', height / 2)
+      .attr('r', function (d) { return d; })
+      .attr('class', 'node');
+      var force = d3.layout.force()
+          .charge(-120)
+          .size([width, height])
+          .nodes(data)
+          .links(links);
+    };
+
+
+
+    Tasks.find().observe({
+      added: function () {
+        x = d3.scale.ordinal()
+          .domain(d3.range(_.map(Tasks.find({project:Session.get('selectedProject')}).fetch(), function(task){ return 10;}).length))
+          .rangePoints([0, width], 1);
+        drawNodes();
+      }
+    });
 
 force.on('end', function() {
       node.attr('r', width/25)
@@ -46,6 +62,7 @@ force.on('end', function() {
 });
 
 force.start();
+
 
 
     // var drawCircles = function (update) {
