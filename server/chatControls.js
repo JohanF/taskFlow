@@ -8,6 +8,11 @@ Meteor.methods({
 		});
 		return chatUsers;
 	},
+	/***change chatTitle and description
+	*/
+	editChat: function(chatId, cTitle, cDesc) {
+		Chats.update({_id: chatId}, { $set : {'title': cTitle, 'description': cDesc } } , {multi:true} );
+	},
 	createEmptyChat: function (userId){
 		console.log("newChat")
 		Chats.insert({

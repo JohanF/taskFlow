@@ -76,6 +76,8 @@ Template.message.helpers({
 
 loadChatSettings = function(){
     $("#chatSettingsModal").show();
+    $('#chatName').val(Chats.findOne(chatData._id).title);
+    $('#chatDescription').val(Chats.findOne(chatData._id).description);
 }
 loadAddUserToChat = function(){
     $("#addUserToChatModal").show();
@@ -126,7 +128,8 @@ Template.addusertochat.rendered = function() {
 Template.addusertochat.events({
     'click #closeAddUserToChat': function () {
        //close modal
-       console.log("vlosing");
+        $('.user-search').val('');
+
         $("#addUserToChatModal").hide();
     },
     'click #addUserToChat': function () {
@@ -136,6 +139,7 @@ Template.addusertochat.events({
 });
 Template.chatsettings.rendered = function() {
     $("#chatSettingsModal").hide();
+
 }
 
 Template.chatsettings.events({
@@ -146,8 +150,14 @@ Template.chatsettings.events({
         $('#chatDescription').val('');
     },
     'click #saveChatSettings': function () {
-        var pName = $('#chatName').val();
-        var pDesc = $('#chatDescription').val();
+        var cName = $('#chatName').val();
+        var cDesc = $('#chatDescription').val();
+        Meteor.call("editChat", chatData._id, cName, cDesc, function(error, result){
+          if(error){
+           console.log(error.reason);
+           return;
+          }
+        });
         $("#chatSettingsModal").hide();
         $('#chatName').val('');
         $('#chatDescription').val('');
