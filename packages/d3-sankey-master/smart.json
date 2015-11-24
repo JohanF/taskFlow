@@ -1,0 +1,9 @@
+{
+    "name": "d3-sankey",
+    "description": "Meteor package for the Sankey D3 plugin",
+    "homepage": "https://github.com/Phocion/d3-sankey",
+    "author": "mbostock",
+    "version": "1.0",
+    "git": "https://github.com/Phocion/d3-sankey.git",
+    "packages": {}
+}
