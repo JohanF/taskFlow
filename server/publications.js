@@ -17,6 +17,10 @@ Meteor.publish("addtaskusers", function () {
   return AddTaskUsers.find();
 });
 
+Meteor.publish("users", function () {
+    return Meteor.users.find();
+});
+
 Meteor.publish('projectSearchResults', function(query){
     if(query){
         var self = this;

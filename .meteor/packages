@@ -19,3 +19,5 @@ cfs:standard-packages
 cfs:gridfs
 cfs:filesystem
 matteodem:easy-search
+underscore
+d3
