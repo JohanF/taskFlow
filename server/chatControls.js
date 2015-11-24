@@ -8,6 +8,16 @@ Meteor.methods({
 		});
 		return chatUsers;
 	},
+	createEmptyChat: function (userId){
+		console.log("newChat")
+		Chats.insert({
+   		title: "newChat",
+			description: "emptyDescr",
+			members: [userId],
+			admin: userId,
+         messageHistory: []
+ 		});
+	},
 	createChat: function(title, description, userId) {
 		console.log("creating project");
 		Chats.insert({

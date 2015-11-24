@@ -58,6 +58,10 @@ getChats = function(){
    console.log(Chats.find());
    return Chats.find();
 }
+createChatWindow = function(){
+   console.log("createchat")
+   Meteor.call("createEmptyChat",Meteor.userId());
+}
 
 Template.chatList.helpers ({
    chatList: function() {
