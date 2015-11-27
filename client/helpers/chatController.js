@@ -2,7 +2,14 @@ Template.chatview.rendered = function() {
      //on render scroll down!
      $('.container-fluid').scrollTop( $('.chat-div').prop("scrollHeight"));
      Session.set('scrollHeight', $('.chat-div').prop("scrollHeight"));
+
      this.autorun(function(){
+        Meteor.call("getMembersInChat", chatData._id, function(error, result){
+          if(error){
+            console.log(error.reason);
+          }
+          Session.set("membersInChat", result);
+        });
         if(!Meteor.userId()){
             Router.go("/");
         }
@@ -25,6 +32,11 @@ Template.chatview.helpers({
          return Chats.findOne(chatData._id).description;
       }
       return "";
+
+   },
+   userIsAdmin: function() {
+
+      return Chats.findOne(chatData._id).admin == Meteor.userId();//Meteor.call("isUserAdmin", chatData._id, Meteor.userId());
 
    }
 });
@@ -83,6 +95,9 @@ loadAddUserToChat = function(){
     $("#addUserToChatModal").show();
     Session.set("chatSearchResults", []);
 }
+loadRemoveUserFromChat = function(){
+    $("#removeUserFromChatModal").show();
+}
 selectUserToAdd = function(id){
    console.log(id);
    Meteor.call("addUserToChat", id, chatData._id, function(error, result){
@@ -90,8 +105,31 @@ selectUserToAdd = function(id){
       console.log(error.reason);
       return;
      }
+     Meteor.call("getMembersInChat", chatData._id, function(error, result){
+      if(error){
+         console.log(error.reason);
+      }
+      Session.set("membersInChat", result);
+     });
    });
    $("#addUserToChatModal").hide();
+}
+
+selectUserToRemove = function(id){
+   console.log(id);
+   Meteor.call("removeUserFromChat", id, chatData._id, function(error, result){
+     if(error){
+      console.log(error.reason);
+      return;
+     }
+     Meteor.call("getMembersInChat", chatData._id, function(error, result){
+      if(error){
+         console.log(error.reason);
+      }
+      Session.set("membersInChat", result);
+     });
+   });
+   $("#removeUserFromChatModal").hide();
 }
 
 
@@ -125,6 +163,9 @@ Template.addusertochat.helpers({
 Template.addusertochat.rendered = function() {
     $("#addUserToChatModal").hide();
 }
+Template.removeuserfromchat.rendered = function() {
+    $("#removeUserFromChatModal").hide();
+}
 Template.addusertochat.events({
     'click #closeAddUserToChat': function () {
        //close modal
@@ -137,6 +178,22 @@ Template.addusertochat.events({
         $("#addUserToChatModal").hide();
     },
 });
+Template.removeuserfromchat.events({
+    'click #closeRemoveUserFromChat': function () {
+        $("#removeUserFromChatModal").hide();
+    },
+    'click #removeUserFromChat': function () {
+        console.log("ok")
+        $("#addUserToChatModal").hide();
+    }
+});
+
+Template.removeuserfromchat.helpers({
+   chatMembers: function() {
+      return Session.get("membersInChat");
+   }
+});
+
 Template.chatsettings.rendered = function() {
     $("#chatSettingsModal").hide();
 

@@ -3,7 +3,7 @@ Meteor.methods({
 		var chatUsers = [];
 		Chats.findOne(chatId).members.forEach(function(user) {
 			if(Meteor.users.findOne(user) != undefined){
-				chatUsers.push(Meteor.users.findOne(user).username);
+				chatUsers.push(Meteor.users.findOne(user));
 			}
 		});
 		return chatUsers;
@@ -12,6 +12,10 @@ Meteor.methods({
 	*/
 	editChat: function(chatId, cTitle, cDesc) {
 		Chats.update({_id: chatId}, { $set : {'title': cTitle, 'description': cDesc } } , {multi:true} );
+	},
+	isUserAdmin: function(chatId, userId) {
+		var admin = Chats.findOne(chatId).admin;
+		return admin == userId;
 	},
 	createEmptyChat: function (userId){
 		console.log("newChat")
@@ -33,9 +37,6 @@ Meteor.methods({
          messageHistory: []
  		});
 	},
-	addUserToChat: function(chatId, userId) {
-		console.log("unimplemented method for adding a person to the chat");
-	},
 	getUserProfilePicture: function(userId) {
 		console.log(Meteor.users.findOne(userId).profile.pic);
 		return Meteor.users.findOne(userId).profile.pic;
@@ -47,7 +48,16 @@ Meteor.methods({
 		else{
 			Chats.update({_id: chatId}, { $push: {members: userId}});
 		}
-		//if not in chat, add to chat
+	},
+	removeUserFromChat: function(userId, chatId){
+		var tempArray = [];
+		if(_.contains(Chats.findOne(chatId).members, userId)){
+			tempArray = Chats.findOne(chatId).members;
+			var index = tempArray.indexOf(userId);
+			tempArray.splice(index,1);
+				Chats.update({_id: chatId}, { $set: {members: tempArray}});
+		}
+		else{	console.log("wasnt in chat! :()") }
 	},
 	addUserToAllChats: function(userId){
 		Chats.find().forEach(function(chat) {
