@@ -81,6 +81,8 @@ Template.vis.rendered = function () {
         format = function(d) { return formatNumber(d) + " " + units; },
         color = d3.scale.category20();
 
+
+
         // append the svg canvas to the page
         var svg = d3.select("#circles").append("svg")
         .attr("width", width + margin.left + margin.right)
@@ -153,12 +155,12 @@ Template.vis.rendered = function () {
             .attr("class", "node")
             .attr("transform", function(d) {
               // console.log(d.x + " , " + d.y);
-            return "translate(" + d.x + "," + d.y + ")"; });
-          // .call(d3.behavior.drag()
-          //   .origin(function(d) { return d; })
-          //   .on("dragstart", function() {
-          //   this.parentNode.appendChild(this); })
-          //   .on("drag", dragmove));
+            return "translate(" + d.x + "," + d.y + ")"; })
+            .call(d3.behavior.drag()
+            .origin(function(d) { return d; })
+            .on("dragstart", function() {
+            this.parentNode.appendChild(this); })
+            .on("drag", dragmove));
 
           // add the rectangles for the nodes
           node.append("rect")
@@ -184,6 +186,16 @@ Template.vis.rendered = function () {
             .attr("x", 6 + sankey.nodeWidth())
             .attr("text-anchor", "start");
             // }
+            function dragmove(d) {
+            d3.select(this).attr("transform",
+                "translate(" + (
+                     d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
+                  ) + "," + (
+                           d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
+                    ) + ")");
+            sankey.relayout();
+            link.attr("d", path);
+            }
         };
         // Make it all go
         update();
@@ -191,16 +203,7 @@ Template.vis.rendered = function () {
 
 
     // the function for moving the nodes
-    // function dragmove(d) {
-    // d3.select(this).attr("transform",
-    //     "translate(" + (
-    //          d.x = Math.max(0, Math.min(width - d.dx, d3.event.x))
-    //       ) + "," + (
-    //                d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))
-    //         ) + ")");
-    // sankey.relayout();
-    // link.attr("d", path);
-    // }
+
     //
     // var drawSankey = function (update) {
     //
