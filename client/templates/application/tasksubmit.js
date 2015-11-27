@@ -11,7 +11,9 @@ Template.projectview.events({
     var taskUsers = [];
 
 
-    Meteor.call("createTask", $nameText, $descriptionText, Session.get('selectedProject'), _.pluck(AddTaskUsers.find({}, {fields: {'_id':0}}).fetch(), 'uid'));
+    Meteor.call("createTask", $nameText, $descriptionText,
+    Session.get('selectedProject'), _.pluck(AddTaskUsers.find({}, {fields: {'_id':0}}).fetch(), 'uid'),
+    Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[0].priority+1);
     Meteor.call('clearTaskUsers');
     //@TODO add user connection
     },

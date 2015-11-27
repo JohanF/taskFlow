@@ -10,7 +10,7 @@ Template.projectview.events({
 });
 
 loadProjectSettings = function(){
-	console.log("show project settings")
+	// console.log("show project settings")
     $("#projectSettingsModal").show();
 }
 
@@ -29,7 +29,7 @@ Template.projectviewsettings.events({
         $('#projectDescription').val('');
     },
     'click #projectUserSubmitButton': function() {
-    	console.log("add project user");
+    	// console.log("add project user");
       Meteor.call("addProjectUser",Session.get('selectedProject'), this._id);
     }
 });
@@ -70,14 +70,14 @@ Template.searchprojectuser.events({
 
 Template.projectview.helpers({
    projectSearchResults: function() {
-      console.log("autosearch");
+      // console.log("autosearch");
       return Session.get("projectSearchResults");
    }
 });
 
 Template.projectviewsettings.helpers({
   projectSettingSearchResults: function() {
-     console.log("autosearch");
+    //  console.log("autosearch");
      return Session.get("projectSettingSearchResults");
   }
 });
