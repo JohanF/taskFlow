@@ -45,8 +45,8 @@ Template.vis.rendered = function () {
         };
 
         this.addLink = function (source, target, value) {
-            console.log("Target: " + findNode(target));
-            console.log("Source: " + findNode(source));
+            // console.log("Target: " + findNode(target));
+            // console.log("Source: " + findNode(source));
             graph.links.push({"source": findNode(source), "target": findNode(target), "value": value});
             update();
         };
@@ -74,8 +74,8 @@ Template.vis.rendered = function () {
         var units = "Widgets";
 
         var margin = {top: 10, right: 10, bottom: 10, left: 10},
-        width = 500 - margin.left - margin.right,
-        height = 125 - margin.top - margin.bottom;
+        width = 1400 - margin.left - margin.right,
+        height = 280 - margin.top - margin.bottom;
 
         var formatNumber = d3.format(",.0f"),    // zero decimal places
         format = function(d) { return formatNumber(d) + " " + units; },
@@ -102,15 +102,15 @@ Template.vis.rendered = function () {
         // load the data
         var graph = {
               "nodes": [
-                      {"name":"dawdwa"},
-                      {"name":"Eat food"},
-                      {"name":"Wake up"},
-                      {"name":"Do laundry"}
+                      // {"name":"dawdwa"},
+                      // {"name":"Eat food"},
+        //               {"name":"Wake up"},
+        //               {"name":"Do laundry"}
                       ],
               "links": [
-                    {"source":"dawdwa","target":"Eat food","value":"25"},
-                    {"source":"Eat food","target":"Wake up","value":"15"},
-                    {"source":"Wake up","target":"Do laundry","value":"17.6"}
+                    // {"source":"dawdwa","target":"Eat food","value":"25"},
+        //             {"source":"Eat food","target":"Wake up","value":"15"},
+        //             {"source":"Wake up","target":"Do laundry","value":"17.6"}
                     ]
             };
 
@@ -195,7 +195,7 @@ Template.vis.rendered = function () {
                     ) + ")");
             sankey.relayout();
             link.attr("d", path);
-            }
+          }
         };
         // Make it all go
         update();
@@ -211,6 +211,7 @@ Template.vis.rendered = function () {
 
     (function() {
       var initializing = true;
+      var lastVal = undefined;
       theGraph = new myGraph();
       Tasks.find({project:Session.get('selectedProject')}).observe({
         added: function (task) {
@@ -221,11 +222,25 @@ Template.vis.rendered = function () {
             // Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[0].title
             // theGraph.addLink(task.title, "Industrial Processes", "25");
             // theGraph.addLink(task.title, "Electricity and heat", "14.9");
+          } else {
+            // console.log(task);
+
+            // console.log(lastVal);
+            // for (val in (Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: 1}}).fetch())) {
+              theGraph.addNode(task.title);
+              if(lastVal != undefined) {
+                  theGraph.addLink(task.title, lastVal.title, 11);
+                  }
+              lastVal = task;
+              // if(lastTask != undefined){
+              // }
+              // lastTask = task;
           }
         },
         changed: function () {
           // theGraph.addNode("test");
           // _.partial(myGraph.update, false);
+
         }
       });
       if (initializing) {
@@ -248,7 +263,10 @@ Template.vis.rendered = function () {
     })();
 };
 
-
+var lastValMap = {}
+function get(k){
+  return lastValMap[k];
+}
 
     // var drawCircles = function (update) {
     //   var data = _.map(Projects.find().fetch(), function(proj){ return 10;});
