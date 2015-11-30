@@ -213,6 +213,28 @@ Template.vis.rendered = function () {
       var initializing = true;
       var lastVal = undefined;
       theGraph = new myGraph();
+      var lastValMap = new Object();
+
+      function getLastVal(k){
+        return lastValMap[k];
+      }
+
+      function initNodes(){
+
+        Tasks.find({project:Session.get('selectedProject')}, {sort: {priority: 1}}).fetch().forEach(function(task) {
+          theGraph.addNode(task.title);
+          // console.log(theGraph);
+
+          (task.assignedUsers).forEach(function(assUsr) {
+            if(getLastVal(assUsr) != undefined) {
+               theGraph.addLink(task.title, getLastVal(assUsr).title, 11);
+               }
+              lastValMap[assUsr] = task;
+          }); //@TODO add priority ordering functionality... Going to be a f*in hassle.
+        });
+
+      }
+
       Tasks.find({project:Session.get('selectedProject')}).observe({
         added: function (task) {
           if (!initializing) {
@@ -223,18 +245,7 @@ Template.vis.rendered = function () {
             // theGraph.addLink(task.title, "Industrial Processes", "25");
             // theGraph.addLink(task.title, "Electricity and heat", "14.9");
           } else {
-            // console.log(task);
 
-            // console.log(lastVal);
-            // for (val in (Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: 1}}).fetch())) {
-              theGraph.addNode(task.title);
-              if(lastVal != undefined) {
-                  theGraph.addLink(task.title, lastVal.title, 11);
-                  }
-              lastVal = task;
-              // if(lastTask != undefined){
-              // }
-              // lastTask = task;
           }
         },
         changed: function () {
@@ -257,16 +268,14 @@ Template.vis.rendered = function () {
       // theGraph.addLink("Energy", "Industry", "14.7");
       // theGraph.addLink("Energy", "Land Use Change", "8.6");
       // theGraph.addLink("Energy", "Agriculture", "14.3");
+       initNodes();
        theGraph.updateFunc();
        initializing = false;
       }
     })();
 };
 
-var lastValMap = {}
-function get(k){
-  return lastValMap[k];
-}
+
 
     // var drawCircles = function (update) {
     //   var data = _.map(Projects.find().fetch(), function(proj){ return 10;});
