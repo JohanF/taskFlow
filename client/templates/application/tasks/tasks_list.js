@@ -54,9 +54,10 @@ if(Meteor.isClient) {
 	          else {
 	            newRank = (Blaze.getData(after).priority +
 	                       Blaze.getData(before).priority)/2
-												 
+
 						  Session.set('beforeTaskAfter', Blaze.getData(before).title);
 							Session.set('afterTaskAfter', Blaze.getData(after).title);
+
 
 							}
 
@@ -76,13 +77,10 @@ if(Meteor.isClient) {
 					start: function(e, ui) {
 						if(ui.item.index() == 0){
 							removedFirst = true;
-								after = ui.item.next().get(0);
-								Session.set('beforeTaskBefore', "");
+							Session.set('beforeTaskBefore', "");
 						} else {
 							before = ui.item.prev().get(0);
-							// after = ui.item.next().get(0);
-							Session.set('beforeTaskBefore', Blaze.getData(before));
-							// Session.set('afterTaskBefore', Blaze.getData(after));
+							Session.set('beforeTaskBefore', Blaze.getData(before).title);
 						}
 
 					},

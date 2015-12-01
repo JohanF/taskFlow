@@ -27,11 +27,25 @@ Template.vis.rendered = function () {
         this.removeLink = function (source, target) {
             for (var i = 0; i < graph.links.length; i++) {
                 if (graph.links[i].source.name == source && graph.links[i].target.name == target) {
+
+                    console.log("source name: " + graph.links[i].source.name);
+                      console.log("target name: " + graph.links[i].target.name);
                     graph.links.splice(i, 1);
                     break;
                 }
             }
+            // console.log(graph.links);
             update();
+        };
+
+        this.returnLinks = function (source) {
+          var tempArray = [];
+              for (var i = 0; i < graph.links.length; i++) {
+                  if (graph.links[i].source.name == source) {
+                    tempArray.push(graph.links[i]);
+                  }
+              } // @TODO only let users switch places on their own tasks
+            return tempArray;
         };
 
         this.removeallLinks = function () {
@@ -260,15 +274,28 @@ Template.vis.rendered = function () {
           //Establish links between new neighbors
           theGraph.removeLink(Session.get('beforeTaskAfter'), (Session.get('afterTaskAfter')));
 
-                    theGraph.printGraph();
+          // console.log(Session.get('beforeTaskAfter'));
           theGraph.addLink(Session.get('beforeTaskAfter'), task.title, 11);
 
-                    theGraph.printGraph();
-          // theGraph.addLink(task.title, (Session.get('afterTaskAfter')), 11);
+          // console.log(Session.get('afterTaskBefore'));
+
+          var oldLinks = theGraph.returnLinks(task.title);
+          oldLinks.forEach(function(entry) { //@TODO Make it only affect the users task.
+              // console.log(task.title);
+              // console.log(entry);
+              if(entry.target.name != undefined){
+                console.log("banana");
+              theGraph.removeLink(task.title, entry.target.name);
+              theGraph.removeLink(Session.get('beforeTaskBefore'), task.title, 11);
+              theGraph.addLink(Session.get('beforeTaskBefore'), entry.target.name, 11);
+              }
+          });
+
+        theGraph.addLink(task.title, Session.get('afterTaskAfter'), 11);
+
           //
           //           theGraph.printGraph();
           // //Repoint old neighbors.
-          // theGraph.removeLink(Session.get('beforeTaskBefore'), task.title);
           //
           // theGraph.printGraph();
 
