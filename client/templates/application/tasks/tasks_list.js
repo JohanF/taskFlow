@@ -1,6 +1,6 @@
 if(Meteor.isClient) {
 
-	 
+
 
 	Template.tasksList.helpers({
 	 tasks: function () {
@@ -39,15 +39,26 @@ if(Meteor.isClient) {
 
 	            newRank = Blaze.getData(after).priority - 1
 
+						  Session.set('beforeTaskAfter', "");
+							Session.set('afterTaskAfter', Blaze.getData(after).title);
+
+
 							// A task overtakes highest priority position --> Alert activity for involved tasks
 
 	          } else if(!after) {
 	            newRank = Blaze.getData(before).priority + 1
+
+						  Session.set('beforeTaskAfter', Blaze.getData(before).title);
+							Session.set('afterTaskAfter', "");
 	          }
 	          else {
 	            newRank = (Blaze.getData(after).priority +
 	                       Blaze.getData(before).priority)/2
-	            }
+												 
+						  Session.set('beforeTaskAfter', Blaze.getData(before).title);
+							Session.set('afterTaskAfter', Blaze.getData(after).title);
+
+							}
 
 				if(removedFirst){
 					Meteor.call("createTaskActivity", 'Work stopped', Meteor.userId(), Date.now(), Blaze.getData(el)._id);
@@ -65,7 +76,15 @@ if(Meteor.isClient) {
 					start: function(e, ui) {
 						if(ui.item.index() == 0){
 							removedFirst = true;
+								after = ui.item.next().get(0);
+								Session.set('beforeTaskBefore', "");
+						} else {
+							before = ui.item.prev().get(0);
+							// after = ui.item.next().get(0);
+							Session.set('beforeTaskBefore', Blaze.getData(before));
+							// Session.set('afterTaskBefore', Blaze.getData(after));
 						}
+
 					},
 				})
 	}

@@ -26,7 +26,7 @@ Template.vis.rendered = function () {
 
         this.removeLink = function (source, target) {
             for (var i = 0; i < graph.links.length; i++) {
-                if (graph.links[i].source.id == source && graph.links[i].target.id == target) {
+                if (graph.links[i].source.name == source && graph.links[i].target.name == target) {
                     graph.links.splice(i, 1);
                     break;
                 }
@@ -52,7 +52,7 @@ Template.vis.rendered = function () {
         };
 
         this.printGraph = function() {
-          console.log(graph);
+          console.log(graph.links);
         };
 
         var findNode = function (id) {
@@ -126,6 +126,7 @@ Template.vis.rendered = function () {
 
         var update = function () {
           // if(!update){
+          if(graph.nodes.length > 0 && graph.links.length > 0) {
           svg.selectAll("*").remove();
 
           sankey
@@ -196,6 +197,7 @@ Template.vis.rendered = function () {
             sankey.relayout();
             link.attr("d", path);
           }
+          }
         };
         // Make it all go
         update();
@@ -221,7 +223,7 @@ Template.vis.rendered = function () {
 
       function initNodes(){
 
-        Tasks.find({project:Session.get('selectedProject')}, {sort: {priority: 1}}).fetch().forEach(function(task) {
+        Tasks.find({project:Session.get('selectedProject')}, {sort: {priority: -1}}).fetch().forEach(function(task) {
           theGraph.addNode(task.title);
           // console.log(theGraph);
 
@@ -230,7 +232,7 @@ Template.vis.rendered = function () {
                theGraph.addLink(task.title, getLastVal(assUsr).title, 11);
                }
               lastValMap[assUsr] = task;
-          }); //@TODO add priority ordering functionality... Going to be a f*in hassle.
+          });
         });
 
       }
@@ -248,7 +250,33 @@ Template.vis.rendered = function () {
 
           }
         },
-        changed: function () {
+        changed: function (task) {
+          // console.log(task);
+          // console.log(Session.get('afterTaskBefore'));
+          // console.log(Session.get('beforeTaskBefore'));
+          // console.log(Session.get('beforeTaskAfter'));
+          // console.log(Session.get('afterTaskAfter'));
+
+          //Establish links between new neighbors
+          theGraph.removeLink(Session.get('beforeTaskAfter'), (Session.get('afterTaskAfter')));
+
+                    theGraph.printGraph();
+          theGraph.addLink(Session.get('beforeTaskAfter'), task.title, 11);
+
+                    theGraph.printGraph();
+          // theGraph.addLink(task.title, (Session.get('afterTaskAfter')), 11);
+          //
+          //           theGraph.printGraph();
+          // //Repoint old neighbors.
+          // theGraph.removeLink(Session.get('beforeTaskBefore'), task.title);
+          //
+          // theGraph.printGraph();
+
+          // console.log(theGraph.links);
+          // var afterLink = _.find(theGraph.links, function(link){ return console.log(link.source) + " AND " + console.log(task.title); });
+          // var beforeLink = _.find(theGraph.links, function(link){ return link.target = task.title; });
+          // console.log(afterLink);
+          // console.log(beforeLink);
           // theGraph.addNode("test");
           // _.partial(myGraph.update, false);
 
