@@ -28,8 +28,8 @@ Template.vis.rendered = function () {
             for (var i = 0; i < graph.links.length; i++) {
                 if (graph.links[i].source.name == source && graph.links[i].target.name == target) {
 
-                    console.log("source name: " + graph.links[i].source.name);
-                      console.log("target name: " + graph.links[i].target.name);
+                    // console.log("source name: " + graph.links[i].source.name);
+                    //   console.log("target name: " + graph.links[i].target.name);
                     graph.links.splice(i, 1);
                     break;
                 }
@@ -272,27 +272,45 @@ Template.vis.rendered = function () {
           // console.log(Session.get('afterTaskAfter'));
 
           //Establish links between new neighbors
+          if(Session.get('beforeTaskAfter') != "" && Session.get('afterTaskAfter') != ""){
+
           theGraph.removeLink(Session.get('beforeTaskAfter'), (Session.get('afterTaskAfter')));
-
-          // console.log(Session.get('beforeTaskAfter'));
-          theGraph.addLink(Session.get('beforeTaskAfter'), task.title, 11);
-
-          // console.log(Session.get('afterTaskBefore'));
+          console.log("removed link between: " + Session.get('beforeTaskAfter') + " and " + (Session.get('afterTaskAfter')));
+        }
 
           var oldLinks = theGraph.returnLinks(task.title);
           oldLinks.forEach(function(entry) { //@TODO Make it only affect the users task.
               // console.log(task.title);
               // console.log(entry);
               if(entry.target.name != undefined){
-                console.log("banana");
+                // console.log("banana");
               theGraph.removeLink(task.title, entry.target.name);
-              theGraph.removeLink(Session.get('beforeTaskBefore'), task.title, 11);
-              theGraph.addLink(Session.get('beforeTaskBefore'), entry.target.name, 11);
+              console.log("removed link between: " + task.title + " and " + entry.target.name);
+
+                  if(Session.get('beforeTaskBefore') != ""){
+                    theGraph.removeLink(Session.get('beforeTaskBefore'), task.title);
+                    console.log("removed link between: " + Session.get('beforeTaskBefore') + " and " + task.title);
+                  }
+                  if(Session.get('beforeTaskBefore') != "" && entry.target.name != ""){ // @TODO only add links between user tasks.
+                    theGraph.addLink(Session.get('beforeTaskBefore'), entry.target.name, 11);
+                    console.log("added link between: " + Session.get('beforeTaskBefore') + " and " + entry.target.name);
+                  }
               }
           });
 
-        theGraph.addLink(task.title, Session.get('afterTaskAfter'), 11);
+          if(Session.get('beforeTaskAfter') != ""){
+                    theGraph.addLink(Session.get('beforeTaskAfter'), task.title, 11);
+                    console.log("added link between: " + Session.get('beforeTaskAfter') + " and " + task.title);
+          }
 
+          // console.log(Session.get('afterTaskBefore'));
+
+
+         // @TODO moving forward works with this solution, moving backwards doesn't!!!
+
+    if(Session.get('afterTaskAfter') != ""){
+        theGraph.addLink(task.title, Session.get('afterTaskAfter'), 11);
+      }
           //
           //           theGraph.printGraph();
           // //Repoint old neighbors.
