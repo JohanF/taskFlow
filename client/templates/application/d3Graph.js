@@ -1,4 +1,23 @@
+
 Template.vis.rendered = function () {
+
+  var Singleton = (function () {
+    var instance;
+
+    function createInstance() {
+        var object = new myGraph()
+        return object;
+    }
+
+    return {
+        getInstance: function () {
+            if (!instance) {
+                instance = createInstance();
+            }
+            return instance;
+        }
+    };
+    })();
 
   function myGraph() {
 
@@ -38,10 +57,20 @@ Template.vis.rendered = function () {
             update();
         };
 
-        this.returnLinks = function (source) {
+        this.sourceLinks = function (source) {
           var tempArray = [];
               for (var i = 0; i < graph.links.length; i++) {
-                  if (graph.links[i].source.name == source) {
+                  if (graph.links[i].source.name == source && Tasks.find({title: graph.links[i].target.name, project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}).fetch().length > 0) {
+                    tempArray.push(graph.links[i]);
+                  }
+              } // @TODO only let users switch places on their own tasks
+            return tempArray;
+        };
+
+        this.targetLinks = function (target) {
+          var tempArray = [];
+              for (var i = 0; i < graph.links.length; i++) {
+                  if (graph.links[i].target.name == target && Tasks.find({title: graph.links[i].source.name, project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}).fetch().length > 0) {
                     tempArray.push(graph.links[i]);
                   }
               } // @TODO only let users switch places on their own tasks
@@ -228,8 +257,9 @@ Template.vis.rendered = function () {
     (function() {
       var initializing = true;
       var lastVal = undefined;
-      theGraph = new myGraph();
+      theGraph = Singleton.getInstance();
       var lastValMap = new Object();
+      var updateInt = 0;
 
       function getLastVal(k){
         return lastValMap[k];
@@ -249,9 +279,10 @@ Template.vis.rendered = function () {
           });
         });
 
+       theGraph.printGraph();
       }
 
-      Tasks.find({project:Session.get('selectedProject')}).observe({
+      Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}).observe({
         added: function (task) {
           if (!initializing) {
             theGraph.addNode(task.title);
@@ -265,6 +296,9 @@ Template.vis.rendered = function () {
           }
         },
         changed: function (task) {
+          console.log(task);
+          updateInt = updateInt +1;
+          console.log(updateInt);
           // console.log(task);
           // console.log(Session.get('afterTaskBefore'));
           // console.log(Session.get('beforeTaskBefore'));
@@ -275,35 +309,41 @@ Template.vis.rendered = function () {
           if(Session.get('beforeTaskAfter') != "" && Session.get('afterTaskAfter') != ""){
 
           theGraph.removeLink(Session.get('beforeTaskAfter'), (Session.get('afterTaskAfter')));
-          console.log("removed link between: " + Session.get('beforeTaskAfter') + " and " + (Session.get('afterTaskAfter')));
+          // console.log("removed link between: " + Session.get('beforeTaskAfter') + " and " + (Session.get('afterTaskAfter')));
         }
 
-          var oldLinks = theGraph.returnLinks(task.title);
-          oldLinks.forEach(function(entry) { //@TODO Make it only affect the users task.
+          var sourceLinks = theGraph.sourceLinks(task.title);
+          sourceLinks.forEach(function(entry) { //@TODO Make it only affect the users task.
               // console.log(task.title);
               // console.log(entry);
               if(entry.target.name != undefined){
                 // console.log("banana");
               theGraph.removeLink(task.title, entry.target.name);
-              console.log("removed link between: " + task.title + " and " + entry.target.name);
+              // console.log("removed link between: " + task.title + " and " + entry.target.name);
 
-                  if(Session.get('beforeTaskBefore') != ""){
-                    theGraph.removeLink(Session.get('beforeTaskBefore'), task.title);
-                    console.log("removed link between: " + Session.get('beforeTaskBefore') + " and " + task.title);
-                  }
                   if(Session.get('beforeTaskBefore') != "" && entry.target.name != ""){ // @TODO only add links between user tasks.
                     theGraph.addLink(Session.get('beforeTaskBefore'), entry.target.name, 11);
-                    console.log("added link between: " + Session.get('beforeTaskBefore') + " and " + entry.target.name);
+                    // console.log("added link between: " + Session.get('beforeTaskBefore') + " and " + entry.target.name);
                   }
               }
           });
 
+
+          var targetLinks = theGraph.targetLinks(task.title);
+          targetLinks.forEach(function(entry) {
+          if(Session.get('beforeTaskBefore') != ""){
+            theGraph.removeLink(Session.get('beforeTaskBefore'), task.title);
+            // console.log("removed link between: " + Session.get('beforeTaskBefore') + " and " + task.title);
+          }
+        });
+
           if(Session.get('beforeTaskAfter') != ""){
                     theGraph.addLink(Session.get('beforeTaskAfter'), task.title, 11);
-                    console.log("added link between: " + Session.get('beforeTaskAfter') + " and " + task.title);
+                    // console.log("added link between: " + Session.get('beforeTaskAfter') + " and " + task.title);
           }
 
           // console.log(Session.get('afterTaskBefore'));
+
 
 
          // @TODO moving forward works with this solution, moving backwards doesn't!!!
