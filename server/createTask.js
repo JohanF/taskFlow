@@ -1,13 +1,12 @@
 Meteor.methods({
-	createTask: function(name, description, project, uidArray) {
+	createTask: function(name, description, project, uidPrio) {
 		console.log("creating task");
 		Tasks.insert({
-   			title: name,
+   		title: name,
 			description: description,
 			status: 'New task',
-			priority: 3,
-			assignedUsers: uidArray,
-         	project: project
+			assignedUsers: uidPrio,
+      project: project
  		});
 	}
 });
