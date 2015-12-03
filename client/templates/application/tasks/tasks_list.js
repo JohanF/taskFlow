@@ -1,10 +1,10 @@
 if(Meteor.isClient) {
 
-	 
+
 
 	Template.tasksList.helpers({
 	 tasks: function () {
-	      return Tasks.find({assignedUsers:Meteor.userId(), project:projectData._id}, {sort: {priority: 1}});
+	      return Tasks.find({'assignedUsers.uid':Meteor.userId(), project:projectData._id}, {sort: {'assignedUsers.priority': 1}});
 	    }
 	});
 
@@ -37,16 +37,15 @@ if(Meteor.isClient) {
 
 							Meteor.call("createTaskActivity", 'Work being performed', Meteor.userId(), Date.now(), Blaze.getData(el)._id);
 
-	            newRank = Blaze.getData(after).priority - 1
-
+              newRank = thisUserPriority(Blaze.getData(after).assignedUsers) - 1
 							// A task overtakes highest priority position --> Alert activity for involved tasks
 
 	          } else if(!after) {
-	            newRank = Blaze.getData(before).priority + 1
+	            newRank = thisUserPriority(Blaze.getData(before).assignedUsers) + 1
 	          }
 	          else {
-	            newRank = (Blaze.getData(after).priority +
-	                       Blaze.getData(before).priority)/2
+	             newRank = (thisUserPriority(Blaze.getData(after).assignedUsers) +
+	                       thisUserPriority(Blaze.getData(before).assignedUsers))/2
 	            }
 
 				if(removedFirst){
@@ -56,7 +55,7 @@ if(Meteor.isClient) {
 
 					removedFirst = false;
 				}
-					Meteor.call("updateTaskPriority",  Blaze.getData(el)._id, newRank);
+					Meteor.call("updateTaskPriority",  Blaze.getData(el)._id, Meteor.userId(), newRank);
 
 	        }
 	    })
@@ -70,3 +69,11 @@ if(Meteor.isClient) {
 				})
 	}
  }
+
+ function thisUserPriority(arr) {
+	 for (var i = 0; i < arr.length; i++) {
+        if (arr[i].uid == Meteor.userId()) {
+            return arr[i].priority;
+        }
+    }
+}
