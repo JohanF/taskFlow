@@ -28,8 +28,8 @@ function toUidPrioObj(arr) {
   var uidPrioObj = [];
   for (var i = 0; i < arr.length; ++i){
     var newPrio
-    if(Tasks.find({project:Session.get('selectedProject'), assignedUsers: arr[i]}, {sort: {priority: -1}}).fetch()[0] != undefined){
-      newPrio = Tasks.find({project:Session.get('selectedProject'), assignedUsers: arr[i]}, {sort: {priority: -1}}).fetch()[0].priority+1;
+    if(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': arr[i]}, {sort: {'assignedUsers.priority': -1}}).fetch()[0] != undefined){
+      newPrio = Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': arr[i]}, {sort: {'assignedUsers.priority': -1}}).fetch()[0].assignedUsers[0].priority+1;
     } else {
       newPrio = 0;
     }

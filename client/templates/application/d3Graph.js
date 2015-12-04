@@ -60,7 +60,7 @@ Template.vis.rendered = function () {
         this.sourceLinks = function (source) {
           var tempArray = [];
               for (var i = 0; i < graph.links.length; i++) {
-                  if (graph.links[i].source.name == source && Tasks.find({title: graph.links[i].target.name, project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}).fetch().length > 0) {
+                  if (graph.links[i].source.name == source && Tasks.find({title: graph.links[i].target.name, project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}).fetch().length > 0) {
                     tempArray.push(graph.links[i]);
                   }
               } // @TODO only let users switch places on their own tasks
@@ -70,7 +70,7 @@ Template.vis.rendered = function () {
         this.targetLinks = function (target) {
           var tempArray = [];
               for (var i = 0; i < graph.links.length; i++) {
-                  if (graph.links[i].target.name == target && Tasks.find({title: graph.links[i].source.name, project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}).fetch().length > 0) {
+                  if (graph.links[i].target.name == target && Tasks.find({title: graph.links[i].source.name, project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}).fetch().length > 0) {
                     tempArray.push(graph.links[i]);
                   }
               } // @TODO only let users switch places on their own tasks
@@ -267,26 +267,29 @@ Template.vis.rendered = function () {
 
       function initNodes(){
 
-        Tasks.find({project:Session.get('selectedProject')}, {sort: {priority: -1}}).fetch().forEach(function(task) {
+        Tasks.find({project:Session.get('selectedProject')}, {sort: {'assignedUsers.priority': -1}}).fetch().forEach(function(task) {
           theGraph.addNode(task.title);
           // console.log(theGraph);
 
           (task.assignedUsers).forEach(function(assUsr) {
-            if(getLastVal(assUsr) != undefined) {
-               theGraph.addLink(task.title, getLastVal(assUsr).title, 11);
+            if(getLastVal(assUsr.uid) != undefined) {
+               theGraph.addLink(task.title, getLastVal(assUsr.uid).title, 11);
                }
-              lastValMap[assUsr] = task;
+              lastValMap[assUsr.uid] = task;
           });
         });
 
        theGraph.printGraph();
       }
 
-      Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}).observe({
+      Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}).observe({
         added: function (task) {
           if (!initializing) {
             theGraph.addNode(task.title);
-            theGraph.addLink(Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[1].title, task.title,  11);
+            console.log(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch());
+            if(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch()[1].title != undefined){
+            theGraph.addLink(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch()[1].title, task.title,  11);
+            }
             // console.log(Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[0].title);
             // Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[0].title
             // theGraph.addLink(task.title, "Industrial Processes", "25");
