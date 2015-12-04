@@ -296,9 +296,9 @@ Template.vis.rendered = function () {
           }
         },
         changed: function (task) {
-          console.log(task);
           updateInt = updateInt +1;
-          console.log(updateInt);
+          // console.log(task);
+          // console.log(updateInt);
           // console.log(task);
           // console.log(Session.get('afterTaskBefore'));
           // console.log(Session.get('beforeTaskBefore'));
