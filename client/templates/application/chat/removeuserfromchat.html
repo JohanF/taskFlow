@@ -1,0 +1,22 @@
+<Template name="removeuserfromchat">
+   <div class="overlay" id="removeUserFromChatModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close hide-modal" id="closeRemoveUserFromChat" data-dismiss="modal" aria-hidden="false">&times;</button>
+                   <h3 class="modal-title">Remove whom?</h3>
+               </div>
+               <div class="modal-body au-body">
+                  <div class="user-search-result-div">
+                     list:
+                     {{#each chatMembers}}
+                     	<p class="user-search-result" onclick="selectUserToRemove('{{_id}}')">{{username}}</p>
+                     {{/each}}
+                  </div>
+
+               </div>
+
+           </div>
+       </div>
+  </div>
+</Template>

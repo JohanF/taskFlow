@@ -40,6 +40,12 @@ loadChat = function() {
     });
 }
 loadChat = function(chatId) {
+   Meteor.call("getMembersInChat", chatId, function(error, result){
+     if(error){
+       console.log(error.reason);
+     }
+     Session.set("membersInChat", result);
+   });
     Router.go("chatview", {
         _chatId: chatId
     });
@@ -47,7 +53,8 @@ loadChat = function(chatId) {
 //temp method for testing. remove later
 addUserToChats= function (){
    if(Meteor.user())
-      Meteor.call("addUserToAllChats", Meteor.user()._id)
+      Meteor.call("addUserToAllChats", Meteor.user()._id);
+
 }
 killWorld = function(){
 	Router.go("/killworld");
@@ -57,6 +64,10 @@ getChats = function(){
    console.log("returning chats: ")
    console.log(Chats.find());
    return Chats.find();
+}
+createChatWindow = function(){
+   console.log("createchat")
+   Meteor.call("createEmptyChat",Meteor.userId());
 }
 
 Template.chatList.helpers ({

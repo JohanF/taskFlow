@@ -10,17 +10,10 @@ Template.projectview.events({
 
     var taskUsers = [];
 
-    var prio;
-    if(Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[0] != undefined){
-      prio = Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[0].priority+1;
-    } else {
-      prio = 0;
-    }
-
+    var uidPrio = toUidPrioObj(_.pluck(AddTaskUsers.find({}, {fields: {'_id':0}}).fetch(), 'uid'));
 
     Meteor.call("createTask", $nameText, $descriptionText,
-    Session.get('selectedProject'), _.pluck(AddTaskUsers.find({}, {fields: {'_id':0}}).fetch(), 'uid'),
-    prio);
+    Session.get('selectedProject'), uidPrio);
     Meteor.call('clearTaskUsers');
     //@TODO add user connection
     },
@@ -30,3 +23,20 @@ Template.projectview.events({
     Meteor.call("addTaskUser", this._id, this.username);
     }
 });
+
+function toUidPrioObj(arr) {
+  var uidPrioObj = [];
+  for (var i = 0; i < arr.length; ++i){
+    var newPrio
+    if(Tasks.find({project:Session.get('selectedProject'), assignedUsers: arr[i]}, {sort: {priority: -1}}).fetch()[0] != undefined){
+      newPrio = Tasks.find({project:Session.get('selectedProject'), assignedUsers: arr[i]}, {sort: {priority: -1}}).fetch()[0].priority+1;
+    } else {
+      newPrio = 0;
+    }
+
+    uidPrioObj.push({"uid": arr[i], "priority": newPrio});
+  }
+  return uidPrioObj;
+}
+
+// links.push({"source": findNode(source), "target": findNode(target), "value": value});

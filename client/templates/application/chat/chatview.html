@@ -2,13 +2,19 @@
 	<div class="chat-primary">
 		{{>chatsettings}}
 		{{>addusertochat}}
+		{{#if userIsAdmin}}
+			{{>removeuserfromchat}}
+		{{/if}}
 		<div class = "chat-header-div">
 			<div class="l-chat">{{chatName}}</div>
 			 <div class="m-chat">{{chatDescription}}</div>
 
 			 <div class="r-chat">
 				 <a href="" class="add-to-chat" onclick="loadAddUserToChat()"></a>
-				 <a href="" class="settings-icon" onclick="loadChatSettings()"></a>
+				 {{#if userIsAdmin}}
+		 				<a href="" class="remove-from-chat" onclick="loadRemoveUserFromChat()"></a>
+				 		<a href="" class="settings-icon" onclick="loadChatSettings()"></a>
+		 		 {{/if}}
 			 </div>
 		</div>
 		<div class="chat-center-content">
@@ -21,7 +27,7 @@
 				</div>
 			</div>
 			<div class="chat-content-right">
-				<p>Peoples:</p>
+				<p style="font-weight: bold;">Peoples:</p>
 				{{> chatmembers}}
 			</div>
 		</div>
@@ -30,7 +36,7 @@
 
 <template name ="chatmembers">
 {{#each chatMembers}}
-	<p>{{this}}</p>
+	<p>{{username}}</p>
 {{/each}}
 </template>
 

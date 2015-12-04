@@ -42,23 +42,22 @@
       <h4 class="sidebar-user-header" style="cursor: pointer;" onclick="goHome()">{{userName}}</h4>
    </div>
 	<div class="sidebar-content">
-      	 <p style="color: white; cursor: pointer;" onclick="goHome()">Home</p>
+      	 <p style="font-size: 150%; color: white; cursor: pointer;" onclick="goHome()">Home</p>
       {{#if isUserLoggedIn}}
-      	 <p style="color: white; cursor: pointer;" onclick="loadProfile()">Profile</p>
-      	 <p style="color: white; cursor: pointer;">Don't click me</p>
+      	 <p style="font-size: 150%; color: white; cursor: pointer;" onclick="loadProfile()">Profile</p>
           {{> chatList}}
-      {{/if}}
       {{>createchat}}
+      {{/if}}
 	</div>
 </template>
 
 <template name="createchat">
 
-      <p style="color:white;">Create chat</p>
+      <p style="color: #CCCCCC;" class="create-chat-button"  onclick="createChatWindow()">Create chat + </p>
 </template>
 
 <template name="chatList">
-   <p style="color: white; padding-top: 7vh; cursor: pointer;" onclick="addUserToChats()"> - Chats - </p>
+   <p style="font-size: 175%; font-weight: bold; color: white; padding-top: 15vh;" onclick="addUserToChats()">Chats</p>
    {{#each chatList}}
        {{>chatName}}
    {{/each}}
