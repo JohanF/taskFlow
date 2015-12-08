@@ -22,7 +22,8 @@ Template.vis.rendered = function () {
   function myGraph() {
 
         this.addNode = function (id) {
-            graph.nodes.push({"name": id});
+            Meteor.call('addNode',Session.get('selectedProject'), id);
+            // graph.nodes.push({"name": id});
             update();
         };
 
@@ -31,88 +32,96 @@ Template.vis.rendered = function () {
         };
 
         this.removeNode = function (id) {
-            var i = 0;
-            var n = findNode(id);
-            while (i < graph.links.length) {
-                if ((graph.links[i]['source'] == n) || (graph.links[i]['target'] == n)) {
-                    graph.links.splice(i, 1);
-                }
-                else i++;
-            }
-            graph.nodes.splice(findNodeIndex(id), 1);
+            Meteor.call('removeNode',Session.get('selectedProject'), id);
+            // var i = 0;
+            // var n = findNode(id);
+            // while (i < graph.links.length) {
+            //     if ((graph.links[i]['source'] == n) || (graph.links[i]['target'] == n)) {
+            //         graph.links.splice(i, 1);
+            //     }
+            //     else i++;
+            // }
+            // graph.nodes.splice(findNodeIndex(id), 1);
             update();
         };
 
         this.removeLink = function (source, target) {
-            for (var i = 0; i < graph.links.length; i++) {
-                if (graph.links[i].source.name == source && graph.links[i].target.name == target) {
-
-                    // console.log("source name: " + graph.links[i].source.name);
-                    //   console.log("target name: " + graph.links[i].target.name);
-                    graph.links.splice(i, 1);
-                    break;
-                }
-            }
+            Meteor.call('removeLink',Session.get('selectedProject'), source, target);
+            // for (var i = 0; i < graph.links.length; i++) {
+            //     if (graph.links[i].source.name == source && graph.links[i].target.name == target) {
+            //
+            //         // console.log("source name: " + graph.links[i].source.name);
+            //         //   console.log("target name: " + graph.links[i].target.name);
+            //         graph.links.splice(i, 1);
+            //         break;
+            //     }
+            // }
             // console.log(graph.links);
             update();
         };
 
         this.sourceLinks = function (source) {
-          var tempArray = [];
-              for (var i = 0; i < graph.links.length; i++) {
-                  if (graph.links[i].source.name == source && Tasks.find({title: graph.links[i].target.name, project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}).fetch().length > 0) {
-                    tempArray.push(graph.links[i]);
-                  }
-              } // @TODO only let users switch places on their own tasks
+
+          var tempArray = Meteor.call('sourceLinks',Session.get('selectedProject'), source);
+          console.log("Source Links : " + tempArray);
+              // for (var i = 0; i < graph.links.length; i++) {
+              //     if (graph.links[i].source.name == source && Tasks.find({title: graph.links[i].target.name, project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}).fetch().length > 0) {
+              //       tempArray.push(graph.links[i]);
+              //     }
+              // } // @TODO only let users switch places on their own tasks
             return tempArray;
         };
 
         this.targetLinks = function (target) {
-          var tempArray = [];
-              for (var i = 0; i < graph.links.length; i++) {
-                  if (graph.links[i].target.name == target && Tasks.find({title: graph.links[i].source.name, project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}).fetch().length > 0) {
-                    tempArray.push(graph.links[i]);
-                  }
-              } // @TODO only let users switch places on their own tasks
+
+          var tempArray = Meteor.call('targetLinks',Session.get('selectedProject'), target);
+              // for (var i = 0; i < graph.links.length; i++) {
+              //     if (graph.links[i].target.name == target && Tasks.find({title: graph.links[i].source.name, project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}).fetch().length > 0) {
+              //       tempArray.push(graph.links[i]);
+              //     }
+              // } // @TODO only let users switch places on their own tasks
             return tempArray;
         };
 
         this.removeallLinks = function () {
-            graph.links.splice(0, graph.links.length);
+          Meteor.call('removeallLinks',Session.get('selectedProject'));
+            // graph.links.splice(0, graph.links.length);
             update();
         };
 
         this.removeAllNodes = function () {
-            graph.nodes.splice(0, graph.links.length);
+          Meteor.call('removeAllNodes',Session.get('selectedProject'));
+            // graph.nodes.splice(0, graph.links.length);
             update();
         };
 
         this.addLink = function (source, target, value) {
-            // console.log("Target: " + findNode(target));
-            // console.log("Source: " + findNode(source));
-            graph.links.push({"source": findNode(source), "target": findNode(target), "value": value});
+          console.log("Target: " + target);
+          console.log("Source: " + source);
+          Meteor.call('addLink',Session.get('selectedProject'), source, target, value);
+            // graph.links.push({"source": findNode(source), "target": findNode(target), "value": value});
             update();
         };
 
-        this.printGraph = function() {
-          console.log(graph.links);
-        };
+        // this.printGraph = function() {
+        //   console.log(graph.links);
+        // };
 
-        var findNode = function (id) {
-            for (var i in graph.nodes) {
-                if (graph.nodes[i]["name"] === id) return graph.nodes[i];
-            }
-            ;
-        };
-
-        var findNodeIndex = function (id) {
-            for (var i = 0; i < graph.nodes.length; i++) {
-                if (graph.nodes[i].id == id) {
-                    return i;
-                }
-            }
-            ;
-        };
+        // var findNode = function (id) {
+        //     for (var i in graph.nodes) {
+        //         if (graph.nodes[i]["name"] === id) return graph.nodes[i];
+        //     }
+        //     ;
+        // };
+        //
+        // var findNodeIndex = function (id) {
+        //     for (var i = 0; i < graph.nodes.length; i++) {
+        //         if (graph.nodes[i].id == id) {
+        //             return i;
+        //         }
+        //     }
+        //     ;
+        // };
 
         var units = "Widgets";
 
@@ -143,32 +152,39 @@ Template.vis.rendered = function () {
         var path = sankey.link();
 
         // load the data
-        var graph = {
-              "nodes": [
-                      // {"name":"dawdwa"},
-                      // {"name":"Eat food"},
-        //               {"name":"Wake up"},
-        //               {"name":"Do laundry"}
-                      ],
-              "links": [
-                    // {"source":"dawdwa","target":"Eat food","value":"25"},
-        //             {"source":"Eat food","target":"Wake up","value":"15"},
-        //             {"source":"Wake up","target":"Do laundry","value":"17.6"}
-                    ]
-            };
+        // var graph = {
+        //       "nodes": [
+        //               // {"name":"dawdwa"},
+        //               // {"name":"Eat food"},
+        // //               {"name":"Wake up"},
+        // //               {"name":"Do laundry"}
+        //               ],
+        //       "links": [
+        //             // {"source":"dawdwa","target":"Eat food","value":"25"},
+        // //             {"source":"Eat food","target":"Wake up","value":"15"},
+        // //             {"source":"Wake up","target":"Do laundry","value":"17.6"}
+        //             ]
+        //     };
 
-        var nodeMap = {};
-        graph.nodes.forEach(function(x) { nodeMap[x.name] = x; });
-        graph.links = graph.links.map(function(x) {
-          return {
-            source: nodeMap[x.source],
-            target: nodeMap[x.target],
-            value: x.value
-          };
-        });
+
 
         var update = function () {
           // if(!update){
+          var graph = Graphs.findOne({project:Session.get('selectedProject')});
+
+          var nodeMap = {};
+          graph.nodes.forEach(function(x) { nodeMap[x.name] = x; });
+          graph.links = graph.links.map(function(x) {
+            return {
+              source: nodeMap[x.source],
+              target: nodeMap[x.target],
+              value: x.value
+            };
+          });
+
+          console.log("The graphnodes: " + graph.nodes);
+         console.log("The graphlinks: " + graph.links);
+
           if(graph.nodes.length > 0 && graph.links.length > 0) {
           svg.selectAll("*").remove();
 
@@ -265,29 +281,33 @@ Template.vis.rendered = function () {
         return lastValMap[k];
       }
 
-      function initNodes(){
+      // function initNodes(){
+      //
+      //   Tasks.find({project:Session.get('selectedProject')}, {sort: {'assignedUsers.priority': -1}}).fetch().forEach(function(task) {
+      //     theGraph.addNode(task.title);
+      //     // console.log(theGraph);
+      //
+      //     (task.assignedUsers).forEach(function(assUsr) {
+      //       if(getLastVal(assUsr.uid) != undefined) {
+      //          theGraph.addLink(task.title, getLastVal(assUsr.uid).title, 11);
+      //          }
+      //         lastValMap[assUsr.uid] = task;
+      //     });
+      //   });
+      //
+      // //  theGraph.printGraph();
+      // }
 
-        Tasks.find({project:Session.get('selectedProject')}, {sort: {'assignedUsers.priority': -1}}).fetch().forEach(function(task) {
-          theGraph.addNode(task.title);
-          // console.log(theGraph);
+      //'assignedUsers.uid': Meteor.userId()
 
-          (task.assignedUsers).forEach(function(assUsr) {
-            if(getLastVal(assUsr.uid) != undefined) {
-               theGraph.addLink(task.title, getLastVal(assUsr.uid).title, 11);
-               }
-              lastValMap[assUsr.uid] = task;
-          });
-        });
-
-       theGraph.printGraph();
-      }
-
-      Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}).observe({
+      Tasks.find({project:Session.get('selectedProject')}).observe({
         added: function (task) {
           if (!initializing) {
             theGraph.addNode(task.title);
             console.log(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch());
-            if(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch()[1].title != undefined){
+            if(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch()[1] != undefined){
+              // console.log(" LALALALA " + Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch());
+              console.log("ADDING LINK");
             theGraph.addLink(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch()[1].title, task.title,  11);
             }
             // console.log(Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[0].title);
@@ -310,6 +330,9 @@ Template.vis.rendered = function () {
 
           //Establish links between new neighbors
           if(Session.get('beforeTaskAfter') != "" && Session.get('afterTaskAfter') != ""){
+
+          console.log("The task before, after the move : " + Session.get('beforeTaskAfter'));
+          console.log("The task after, after the move : " + Session.get('afterTaskAfter'));
 
           theGraph.removeLink(Session.get('beforeTaskAfter'), (Session.get('afterTaskAfter')));
           // console.log("removed link between: " + Session.get('beforeTaskAfter') + " and " + (Session.get('afterTaskAfter')));
@@ -384,8 +407,8 @@ Template.vis.rendered = function () {
       // theGraph.addLink("Energy", "Industry", "14.7");
       // theGraph.addLink("Energy", "Land Use Change", "8.6");
       // theGraph.addLink("Energy", "Agriculture", "14.3");
-       initNodes();
-       theGraph.updateFunc();
+      //  initNodes();
+      //  theGraph.updateFunc();
        initializing = false;
       }
     })();
