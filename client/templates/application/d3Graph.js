@@ -282,7 +282,7 @@ Template.vis.rendered = function () {
        theGraph.printGraph();
       }
 
-      Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}).observe({
+      Tasks.find({project:Session.get('selectedProject')}).observe({
         added: function (task) {
           if (!initializing) {
             theGraph.addNode(task.title);
@@ -290,6 +290,9 @@ Template.vis.rendered = function () {
             if(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch()[1].title != undefined){
             theGraph.addLink(Tasks.find({project:Session.get('selectedProject'), 'assignedUsers.uid': Meteor.userId()}, {sort: {'assignedUsers.priority': -1}}).fetch()[1].title, task.title,  11);
             }
+
+
+                   theGraph.printGraph();
             // console.log(Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[0].title);
             // Tasks.find({project:Session.get('selectedProject'), assignedUsers: Meteor.userId()}, {sort: {priority: -1}}).fetch()[0].title
             // theGraph.addLink(task.title, "Industrial Processes", "25");
@@ -299,77 +302,66 @@ Template.vis.rendered = function () {
           }
         },
         changed: function (task) {
-          updateInt = updateInt +1;
-          // console.log(task);
-          // console.log(updateInt);
-          // console.log(task);
-          // console.log(Session.get('afterTaskBefore'));
-          // console.log(Session.get('beforeTaskBefore'));
-          // console.log(Session.get('beforeTaskAfter'));
-          // console.log(Session.get('afterTaskAfter'));
 
-          //Establish links between new neighbors
-          if(Session.get('beforeTaskAfter') != "" && Session.get('afterTaskAfter') != ""){
-
-          theGraph.removeLink(Session.get('beforeTaskAfter'), (Session.get('afterTaskAfter')));
-          // console.log("removed link between: " + Session.get('beforeTaskAfter') + " and " + (Session.get('afterTaskAfter')));
+          var beforeTaskAfter = TaskOrder.find({project: Session.get('selectedProject')}).fetch()[0].bta;
+          var afterTaskAfter = TaskOrder.find({project: Session.get('selectedProject')}).fetch()[0].ata;
+          var beforeTaskBefore = TaskOrder.find({project: Session.get('selectedProject')}).fetch()[0].btb;
+          var afterTaskBefore = TaskOrder.find({project: Session.get('selectedProject')}).fetch()[0].atb;
+          //
+          console.log("beforeTaskAfter: " + beforeTaskAfter);
+          console.log("afterTaskAfter: " + afterTaskAfter);
+          console.log("beforeTaskBefore: " + beforeTaskBefore);
+          console.log("afterTaskAfter: " + afterTaskAfter);
+          //
+          // TaskOrder.find({project: 'Y2sesSP8m5wydtzhb'}).fetch()[0].bta
+          // TaskOrder.find({project: 'Y2sesSP8m5wydtzhb'}).fetch()[0].bta
+          // TaskOrder.find({project: 'Y2sesSP8m5wydtzhb'}).fetch()[0].bta
+          // TaskOrder.find({project: 'Y2sesSP8m5wydtzhb'}).fetch()[0].bta
+          //
+          // if(Session.get('beforeTaskAfter') != '' ||
+          //   Session.get('afterTaskAfter') != '' ||
+          //   Session.get('beforeTaskBefore') != '' ||
+          //   Session.get('afterTaskAfter') != ''){
+        //Establish links between new neighbors
+        if(beforeTaskAfter != "" && afterTaskAfter != ""){
+          theGraph.removeLink(beforeTaskAfter, afterTaskAfter);
         }
 
-          var sourceLinks = theGraph.sourceLinks(task.title);
-          sourceLinks.forEach(function(entry) { //@TODO Make it only affect the users task.
-              // console.log(task.title);
-              // console.log(entry);
+        var sourceLinks = theGraph.sourceLinks(task.title);
+          sourceLinks.forEach(function(entry) {
               if(entry.target.name != undefined){
-                // console.log("banana");
-              theGraph.removeLink(task.title, entry.target.name);
-              // console.log("removed link between: " + task.title + " and " + entry.target.name);
+                theGraph.removeLink(task.title, entry.target.name);
+                    if(beforeTaskBefore != "" && entry.target.name != ""){ // @TODO only add links between user tasks.
+                        theGraph.addLink(beforeTaskBefore, entry.target.name, 11);
+                      }
+                    }
+                  });
 
-                  if(Session.get('beforeTaskBefore') != "" && entry.target.name != ""){ // @TODO only add links between user tasks.
-                    theGraph.addLink(Session.get('beforeTaskBefore'), entry.target.name, 11);
-                    // console.log("added link between: " + Session.get('beforeTaskBefore') + " and " + entry.target.name);
-                  }
-              }
+
+        var targetLinks = theGraph.targetLinks(task.title);
+          targetLinks.forEach(function(entry) {
+            if(beforeTaskBefore != ""){
+              theGraph.removeLink(beforeTaskBefore, task.title);
+            }
           });
 
+        if(beforeTaskAfter != ""){
+          theGraph.addLink(beforeTaskAfter, task.title, 11);
+        }
 
-          var targetLinks = theGraph.targetLinks(task.title);
-          targetLinks.forEach(function(entry) {
-          if(Session.get('beforeTaskBefore') != ""){
-            theGraph.removeLink(Session.get('beforeTaskBefore'), task.title);
-            // console.log("removed link between: " + Session.get('beforeTaskBefore') + " and " + task.title);
-          }
-        });
+        // @TODO moving forward works with this solution, moving backwards doesn't!!!
 
-          if(Session.get('beforeTaskAfter') != ""){
-                    theGraph.addLink(Session.get('beforeTaskAfter'), task.title, 11);
-                    // console.log("added link between: " + Session.get('beforeTaskAfter') + " and " + task.title);
-          }
-
-          // console.log(Session.get('afterTaskBefore'));
-
-
-
-         // @TODO moving forward works with this solution, moving backwards doesn't!!!
-
-    if(Session.get('afterTaskAfter') != ""){
-        theGraph.addLink(task.title, Session.get('afterTaskAfter'), 11);
-      }
-          //
-          //           theGraph.printGraph();
-          // //Repoint old neighbors.
-          //
-          // theGraph.printGraph();
-
-          // console.log(theGraph.links);
-          // var afterLink = _.find(theGraph.links, function(link){ return console.log(link.source) + " AND " + console.log(task.title); });
-          // var beforeLink = _.find(theGraph.links, function(link){ return link.target = task.title; });
-          // console.log(afterLink);
-          // console.log(beforeLink);
-          // theGraph.addNode("test");
-          // _.partial(myGraph.update, false);
+        if(afterTaskAfter != ""){
+          theGraph.addLink(task.title, afterTaskAfter, 11);
+        }
+      // Session.set('beforeTaskAfter', '');
+      //     Session.set('afterTaskAfter', '');
+      //     Session.set('beforeTaskBefore', '');
+      //     Session.set('afterTaskAfter', '');
+      //   }
 
         }
-      });
+        });
       if (initializing) {
       // theGraph.addNode("Energy");
       // theGraph.printGraph();

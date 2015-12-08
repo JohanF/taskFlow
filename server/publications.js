@@ -21,6 +21,10 @@ Meteor.publish("users", function () {
     return Meteor.users.find();
 });
 
+Meteor.publish("taskorder", function () {
+  return TaskOrder.find();
+});
+
 Meteor.publish('projectSearchResults', function(query){
     if(query){
         var self = this;

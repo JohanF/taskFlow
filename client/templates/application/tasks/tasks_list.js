@@ -37,23 +37,29 @@ if(Meteor.isClient) {
 
 							Meteor.call("createTaskActivity", 'Work being performed', Meteor.userId(), Date.now(), Blaze.getData(el)._id);
               newRank = thisUserPriority(Blaze.getData(after).assignedUsers) - 1;
-
-						  Session.set('beforeTaskAfter', "");
-							Session.set('afterTaskAfter', Blaze.getData(after).title);
+							// {$set: {btb: beforeTaskBefore,
+							// atb: afterTaskBefore,
+							// bta: beforeTaskAfter,
+							// ata: afterTaskAfter}}
+							Meteor.call("updateTaskOrder", projectData._id, Session.get('beforeTaskBefore'), '', '', Blaze.getData(after).title);
+						  // Session.set('beforeTaskAfter', "");
+							// Session.set('afterTaskAfter', Blaze.getData(after).title);
 							// A task overtakes highest priority position --> Alert activity for involved tasks
 
 	          } else if(!after) {
 	            newRank = thisUserPriority(Blaze.getData(before).assignedUsers) + 1;
 
-						  Session.set('beforeTaskAfter', Blaze.getData(before).title);
-							Session.set('afterTaskAfter', "");
+							Meteor.call("updateTaskOrder", projectData._id, Session.get('beforeTaskBefore'), '', Blaze.getData(before).title, '');
+						  // Session.set('beforeTaskAfter', Blaze.getData(before).title);
+							// Session.set('afterTaskAfter', "");
 	          }
 	          else {
 	             newRank = (thisUserPriority(Blaze.getData(after).assignedUsers) +
 	                       thisUserPriority(Blaze.getData(before).assignedUsers))/2;
 
- 						  Session.set('beforeTaskAfter', Blaze.getData(before).title);
- 							Session.set('afterTaskAfter', Blaze.getData(after).title);
+							Meteor.call("updateTaskOrder", projectData._id, Session.get('beforeTaskBefore'), '', Blaze.getData(before).title, Blaze.getData(after).title);
+ 						 //  Session.set('beforeTaskAfter', Blaze.getData(before).title);
+ 						// 	Session.set('afterTaskAfter', Blaze.getData(after).title);
 	            }
 
 				if(removedFirst){

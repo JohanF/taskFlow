@@ -10,7 +10,6 @@ Template.activeTasksList.helpers({
             highPrioTaskObject[(projectTasks[key].assignedUsers[userPrio]).uid] = {priority:(projectTasks[key].assignedUsers[userPrio]).priority, task:projectTasks[key].title};
                     }
            else {
-             console.log((get((projectTasks[key].assignedUsers[userPrio]).uid)).priority);
             if((get((projectTasks[key].assignedUsers[userPrio]).uid)).priority > (projectTasks[key].assignedUsers[userPrio]).priority){
               highPrioTaskObject[(projectTasks[key].assignedUsers[userPrio]).uid] = {priority:(projectTasks[key].assignedUsers[userPrio]).priority, task:projectTasks[key].title};
             }
@@ -20,7 +19,6 @@ Template.activeTasksList.helpers({
 
       var result = [];
       for (var key in highPrioTaskObject) result.push({name:key,task:highPrioTaskObject[key].task, priority:highPrioTaskObject[key].priority});
-      console.log(result);
       return result;
     }
 });
