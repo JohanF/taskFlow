@@ -7,6 +7,6 @@ Meteor.methods({
 			members: [userId],
 			creator: userId
  		});
-		Meteor.call("createTaskOrder", Projects.findOne({title: title})._id, '', '', '', '');
+		Meteor.call("createTaskOrder", Projects.findOne({title: title})._id, '', '', '', '', '');
 	}
 });
