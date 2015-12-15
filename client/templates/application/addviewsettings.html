@@ -1,0 +1,51 @@
+<Template name="addviewsettings">
+   <div class="overlay" id="addModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+       <div class="modal-dialog">
+           <div class="modal-content">
+               <div class="modal-header">
+                   <button type="button" class="close hide-modal" id="closeAddSettings" data-dismiss="modal" aria-hidden="false">&times;</button>
+                   <h3 class="modal-title">Settings</h3>
+               </div>
+               <div class="add-modal-body" style="width:350px;">
+                 <form role="form">
+                   <div class="form-group">
+                     <label for="name-text">Task Name:</label>
+                     <input type="text" class="form-control" id="name-text">
+                   </div>
+                   <div class="form-group">
+                     <label for="description-text">Task Description:</label>
+                     <input type="text" class="form-control" id="description-text">
+                   </div>
+                     <label for="user-text">Task Users:</label>{{> addTaskUsers}}<br>
+                     <div class="user-search-input-div">
+                        {{>searchprojectuser}}
+                     </div>
+                     <div class="user-search-result-div">
+                        {{#each projectSearchResults}}
+                            {{>projectsearchresultobject}}
+                        {{/each}}
+                     </div>
+                     <button type="submit" class="btn btn-default">Submit</button>
+                 </form>
+               </div>
+               <br>
+               <br>
+               <br>
+               <br>
+               <!-- <div class="modal-footer">
+                   <button class="col-md-4 col-md-offset-4 btn  btn-lg" id="saveAddSettings">OK</button>
+               </div> -->
+           </div>
+       </div>
+  </div>
+
+</Template>
+
+<Template name="searchprojectuser">
+   <input type="text" id="searchtext" class="project-user-search" placeholder="Search...">
+</Template>
+
+
+<Template name="projectsearchresultobject">
+   <p class="user-search-result">{{username}} <button id="userSubmitButton" type="button" class="btn btn-primary" data-info={{_id}}>Add to task</button></p>
+</Template>
