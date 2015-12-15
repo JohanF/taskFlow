@@ -1,32 +1,15 @@
 <template name="projectview">
 		{{>projectviewsettings}}
+		{{>addviewsettings}}
 	   <div class="project-header-column project-header-column-activebg">
 			 <div class = "projectview-header-div">
 				 <div class="l-projectview-header"><h1>ProjectView</h1></div>
 					<div class="m-projectview-header"></div>
-					<div class="r-projectview-header"><a href="" class="settings-icon" onclick="loadProjectSettings()"></a></div>
+					<div class="r-projectview-header"><a href="" class="add-icon" onclick="loadAddModal()"></a><a href="" class="settings-icon" onclick="loadProjectSettings()"></a>
+					</div>
 				</div>
 				  {{> vis}}
-				<form role="form">
-					<div class="form-group">
-						<label for="name-text">Task Name:</label>
-						<input type="text" class="form-control" id="name-text">
-					</div>
-					<div class="form-group">
-						<label for="description-text">Task Description:</label>
-						<input type="text" class="form-control" id="description-text">
-					</div>
-						<label for="user-text">Task Users:</label>{{> addTaskUsers}}<br>
-						<div class="user-search-input-div">
-							 {{>searchprojectuser}}
-						</div>
-						<div class="user-search-result-div">
-							 {{#each projectSearchResults}}
-									 {{>projectsearchresultobject}}
-							 {{/each}}
-						</div>
-						<button type="submit" class="btn btn-default">Submit</button>
-				</form>
+
 				<br>
 				<br>
 
@@ -36,21 +19,15 @@
 	<div class="rowzzz">
 		<div class="project-content-column project-content-column-activebg">
 	      			{{> tasksList}}
+
 		</div>
+
 		<div class="project-content-column project-content-column-sleepinbg">
 					{{> activeTasksList}}
-		</div>
+	</div>
 	</div>
 </template>
 
-<Template name="searchprojectuser">
-   <input type="text" id="searchtext" class="project-user-search" placeholder="Search...">
-</Template>
-
-
-<Template name="projectsearchresultobject">
-   <p class="user-search-result">{{username}} <button id="userSubmitButton" type="button" class="btn btn-primary" data-info={{_id}}>Add to task</button></p>
-</Template>
 
 <template name="vis">
   <div id="circles"></div>

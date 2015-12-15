@@ -15,11 +15,12 @@ Template.projectview.events({
     Meteor.call("createTask", $nameText, $descriptionText,
     Session.get('selectedProject'), uidPrio);
     Meteor.call('clearTaskUsers');
+    $("#addModal").hide();
     //@TODO add user connection
     },
     'click #userSubmitButton': function() {
     $('#searchtext').val("");
-    Session.set('projectSearchResults', undefined)
+    Session.set('projectSearchResults', undefined);
     Meteor.call("addTaskUser", this._id, this.username);
     }
 });

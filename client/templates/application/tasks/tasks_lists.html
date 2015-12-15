@@ -1,15 +1,17 @@
-<template name="tasksList">  
-	<div class="tasks">  
+<template name="tasksList">
+	<div class="tasks">
 
-	   <div class="small-column-taskview"> 
+	   <div class="small-column-taskview">
 	   </div>
-	   <div class="large-column-taskview"> 
-	   		
-	   	<div id="taskListDiv"> 
-			{{#each tasks}}      
-				{{> taskItem}}    
+	   <div class="large-column-taskview">
+
+	 			<h1>Task priority list:</h1>
+
+	   	<div id="taskListDiv">
+			{{#each tasks}}
+				{{> taskItem}}
 			{{/each}}
 	</div>
 	</div>
-	</div> 
+	</div>
 </template>

@@ -1,6 +1,7 @@
 Template.projectview.rendered = function() {
     $("#taskModal").hide();
     $("#projectSettingsModal").hide();
+    $("#addModal").hide();
 }
 Template.projectview.events({
     'click #taskInfoButton': function() {
@@ -12,6 +13,11 @@ Template.projectview.events({
 loadProjectSettings = function(){
 	// console.log("show project settings")
     $("#projectSettingsModal").show();
+}
+
+loadAddModal = function(){
+	// console.log("show project settings")
+    $("#addModal").show();
 }
 
 Template.projectviewsettings.events({
@@ -34,6 +40,21 @@ Template.projectviewsettings.events({
     }
 });
 
+Template.addviewsettings.events({
+    'click #closeAddSettings': function () {
+     //close modal
+      $("#addModal").hide();
+    }
+    // ,
+    // 'click #saveAddSettings': function () {
+    //   // var pName = $('#projectName').val();
+    //   // var pDesc = $('#projectDescription').val();
+    //   $("#addModal").hide();
+    //   // $('#projectName').val('');
+    //   // $('#projectDescription').val('');
+    // }
+});
+
 Template.searchprojectsettinguser.events({
   'keypress input': function(event) {
          var text = $('.user-search').val()+String.fromCharCode(event.keyCode);
@@ -51,7 +72,7 @@ Template.searchprojectsettinguser.events({
     }
 });
 
-Template.searchprojectuser.events({
+Template.addviewsettings.events({
   'keypress input': function(event) {
          var text = $('.project-user-search').val()+String.fromCharCode(event.keyCode);
          //console.log(text);
@@ -68,7 +89,7 @@ Template.searchprojectuser.events({
     }
 });
 
-Template.projectview.helpers({
+Template.addviewsettings.helpers({
    projectSearchResults: function() {
       // console.log("autosearch");
       return Session.get("projectSearchResults");

@@ -1,12 +1,13 @@
-<template name="activeTasksList">  
-	<div class="tasks">  
-		<div class="large-column-taskview">  
-			{{#each tasks}}      	
+<template name="activeTasksList">
+	<div class="tasks">
+		<div class="large-column-taskview">
+			<h1>Active tasks for each user:</h1>
+			{{#each tasks}}
 					{{> activeTaskItem}}
-			{{/each}}  
+			{{/each}}
 		</div>
-	   <div class="small-column-taskview"> 
+	   <div class="small-column-taskview">
 	   </div>
-	   
-	</div> 
+
+	</div>
 </template>
