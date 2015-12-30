@@ -281,10 +281,12 @@ Template.vis.rendered = function () {
                 (getLastVal(assUsr.uid).assignedUsers).forEach(function(sharedAssUsr) {
                   if(sharedAssUsr.uid == assUsr.uid){
                     if(sharedAssUsr.priority <= assUsr.priority){
+                      console.log("sharedAssUsr.priority <= assUsr.priority " + (getLastVal(assUsr.uid).title) + " " + task.title);
                       theGraph.addLink(getLastVal(assUsr.uid).title, task.title, 11);
                       lastValMap[assUsr.uid] = task;
                     } else {
-                      //theGraph.addLink(getLastVal(assUsr.uid).title, task.title, 11);
+                      console.log("else " + task.title + " " +(getLastVal(assUsr.uid).title));
+                      theGraph.addLink(task.title, getLastVal(assUsr.uid).title, 11);
                     }
                   }
                 });
