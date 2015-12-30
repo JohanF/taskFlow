@@ -259,23 +259,39 @@ Template.vis.rendered = function () {
       var lastVal = undefined;
       theGraph = Singleton.getInstance();
       var lastValMap = new Object();
+      var lastSharedValMap = new Object();
       var updateInt = 0;
 
       function getLastVal(k){
         return lastValMap[k];
       }
 
+      function getLastSharedVal(k){
+        return lastSharedValMap[k];
+      }
+
       function initNodes(){
 
-        Tasks.find({project:Session.get('selectedProject')}, {sort: {'assignedUsers.priority': -1}}).fetch().forEach(function(task) {
+          Tasks.find({project:Session.get('selectedProject')}, {sort: {'assignedUsers.priority': 1}}).fetch().forEach(function(task) {
           theGraph.addNode(task.title);
           // console.log(theGraph);
 
           (task.assignedUsers).forEach(function(assUsr) {
             if(getLastVal(assUsr.uid) != undefined) {
-               theGraph.addLink(task.title, getLastVal(assUsr.uid).title, 11);
-               }
+                (getLastVal(assUsr.uid).assignedUsers).forEach(function(sharedAssUsr) {
+                  if(sharedAssUsr.uid == assUsr.uid){
+                    if(sharedAssUsr.priority <= assUsr.priority){
+                      theGraph.addLink(getLastVal(assUsr.uid).title, task.title, 11);
+                      lastValMap[assUsr.uid] = task;
+                    } else {
+                      //theGraph.addLink(getLastVal(assUsr.uid).title, task.title, 11);
+                    }
+                  }
+                });
+              }
+              else {
               lastValMap[assUsr.uid] = task;
+              }
           });
         });
 
