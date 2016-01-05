@@ -12,6 +12,7 @@ Template.activityComments.events({
     //   postId: template.data._id
 
     Meteor.call("createComment", $commentText.val(), moment(Date.now()).format('MMMM Do YYYY, h:mm:ss a'), Session.get('activityId'), Meteor.userId());
+    template.find("form").reset();
     //@TODO add user connection
     }
 });
