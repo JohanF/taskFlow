@@ -1,30 +1,23 @@
 Template.activeTasksList.helpers({
  tasks: function () {
       // @TODO Sort by createDate
+      // var highPrioTaskObject = [];
+      var usrHiPrio = []
+      usrHiPrio.push({task:Tasks.find({'assignedUsers.uid':Meteor.userId(), project:projectData._id, _id:
+      Tasks.find({'assignedUsers.uid':Meteor.userId(), project:projectData._id}, {sort: {'assignedUsers.priority': 1}}
+    ).fetch()[0]._id}, {sort: {'assignedUsers.priority': 1}}).fetch()[0], user:Meteor.user().username});
 
-      var projectTasks = Tasks.find({project:projectData._id}).fetch();
 
-      for (var key in projectTasks) {
-        for (var userPrio in projectTasks[key].assignedUsers){
-          if(get((projectTasks[key].assignedUsers[userPrio]).uid) == undefined){
-            highPrioTaskObject[(projectTasks[key].assignedUsers[userPrio]).uid] = {priority:(projectTasks[key].assignedUsers[userPrio]).priority, task:projectTasks[key].title};
-                    }
-           else {
-            if((get((projectTasks[key].assignedUsers[userPrio]).uid)).priority > (projectTasks[key].assignedUsers[userPrio]).priority){
-              highPrioTaskObject[(projectTasks[key].assignedUsers[userPrio]).uid] = {priority:(projectTasks[key].assignedUsers[userPrio]).priority, task:projectTasks[key].title};
-            }
-          }
+      for(var user in Projects.findOne({_id:projectData._id}).members){
+        if(Projects.findOne({_id:projectData._id}).members[user] != Meteor.userId()){
+          usrHiPrio.push({task: (Tasks.find({'assignedUsers.uid':Projects.findOne({_id:projectData._id}).members[user], project:projectData._id, _id:
+       Tasks.find({'assignedUsers.uid':Projects.findOne({_id:projectData._id}).members[user], project:projectData._id}, {sort: {'assignedUsers.priority': 1}}
+     ).fetch()[0]._id}, {sort: {'assignedUsers.priority': 1}}).fetch()[0]), user: Meteor.users.find({_id:Projects.findOne({_id:projectData._id}).members[1]}).fetch()[0].username});
+
         }
       }
 
-      var result = [];
-      for (var key in highPrioTaskObject) result.push({name:key,task:highPrioTaskObject[key].task, priority:highPrioTaskObject[key].priority});
-      return result;
+      return usrHiPrio;
+
     }
 });
-
-var highPrioTaskObject = new Object();
-
-function get(k) {
-    return highPrioTaskObject[k];
-}
