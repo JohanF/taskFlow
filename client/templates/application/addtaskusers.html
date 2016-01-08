@@ -1,7 +1,12 @@
 <template name="addTaskUsers">
 	<div class="addUsers">
 			{{#each addtaskusers}}
-					{{username}}
+					{{username}} <button type="button" class="btn btn-danger" id="removeAddTaskUserButton" style="
+					padding-top: 3px;
+			    padding-bottom: 3px;
+			    padding-left: 6px;
+			    padding-right: 8px;">
+					<b>X</b></button>
 			{{/each}}
 	</div>
 </template>

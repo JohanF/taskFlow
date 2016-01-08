@@ -4,3 +4,9 @@ Template.projectUsers.helpers({
         Projects.find({_id:Session.get('selectedProject')}).fetch()[0].members}});
 		}
 });
+
+Template.projectUsers.events({
+    'click #removeProjectUserButton': function(){
+        console.log(this.username);
+    }
+});

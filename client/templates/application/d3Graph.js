@@ -95,7 +95,6 @@ Template.vis.rendered = function () {
         };
 
         this.printGraph = function() {
-          console.log(graph.links);
         };
 
         var findNode = function (id) {

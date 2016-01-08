@@ -5,7 +5,12 @@ Meteor.methods({
    			uid: userId,
 				username: uname
  		});
-	}, clearTaskUsers: function(){
+	},
+	removeTaskUser: function(uname){
+		console.log(uname);
+		AddTaskUsers.remove(uname);
+	},
+	clearTaskUsers: function(){
 		AddTaskUsers.remove({});
 	}
 });
