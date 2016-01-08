@@ -1,14 +1,5 @@
 <template name="activityComments">
     <div class="commentsBody">
-    <!-- <div class="titleBox"> -->
-      <!-- <label>Comment Box</label> -->
-        <!-- <button type="button" class="close" aria-hidden="true">&times;</button> -->
-    <!-- </div> -->
-    <!-- <div class="commentBox"> -->
-
-        <!-- <p class="taskDescription">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p> -->
-    <!-- </div> -->
-    <!-- <div class="actionBox"> -->
         <ul class="commentList">
             {{#each comments}}
 				{{> commentItem}}
@@ -16,8 +7,6 @@
         </ul>
 
         <form class="form-inline" role="form">
-                <!-- <input type="text" placeholder="Your comments" name="playerName" style="width:365px">
-                <input type="submit" value="Add"> -->
             <div class="form-group activity-form">
             <input name="comment" class="form-control" type="text" placeholder="Your comments" style="width:364px"/>
             </div>

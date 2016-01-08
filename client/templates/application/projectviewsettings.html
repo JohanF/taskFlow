@@ -7,22 +7,22 @@
                    <h3 class="modal-title">Settings</h3>
                </div>
                <div class="project-modal-body">
-                       <div class="form-group">
+                       <div class="form-group" style="margin-bottom:7px">
                            <label for="Name">Project name:</label>
-                           <input name="Name" id="projectName"/>
+                           <input name="Name" id="projectName" style="margin-right:10px"/>
                        </div>
                        <div class="form-group">
                            <label for="Description">Project description:</label>
-                           <input name="Description" id="projectDescription"/>
+                           <input name="Description" id="projectDescription" style="margin-right:10px"/>
                        </div>
 
-             					<label for="user-text">Project Users:</label>{{> projectUsers}}<br>
+             					<label for="user-text" style="margin-top:0px">Project Users:</label>{{> projectUsers}}<br>
 
 											 <div class="form-group">
-                         <div class="user-search-input-div">
+                         <div class="user-search-input-div" style="margin-left:50px">
                             {{>searchprojectsettinguser}}
                          </div>
-                         <div class="user-search-result-div">
+                         <div class="user-search-result-div" style="margin-left:50px">
                             {{#each projectSettingSearchResults}}
                                 {{>searchrojectsettingresultobject}}
                             {{/each}}
@@ -43,5 +43,5 @@
 </Template>
 
 <Template name="searchprojectsettinguser">
-   <input type="text" class="user-search" placeholder="Search...">
+   <input type="text" class="user-search" placeholder="Search for users to add...">
 </Template>
