@@ -30,9 +30,10 @@ Template.projectviewsettings.events({
     'click #saveProjectSettings': function () {
         var pName = $('#projectName').val();
         var pDesc = $('#projectDescription').val();
+        Meteor.call("setProjectInfo",Session.get('selectedProject'), pName, pDesc);
         $("#projectSettingsModal").hide();
-        $('#projectName').val('');
-        $('#projectDescription').val('');
+        $('#projectName').val(pName);
+        $('#projectDescription').val(pDesc);
     },
     'click #projectUserSubmitButton': function() {
     	// console.log("add project user");
@@ -45,14 +46,6 @@ Template.addviewsettings.events({
      //close modal
       $("#addModal").hide();
     }
-    // ,
-    // 'click #saveAddSettings': function () {
-    //   // var pName = $('#projectName').val();
-    //   // var pDesc = $('#projectDescription').val();
-    //   $("#addModal").hide();
-    //   // $('#projectName').val('');
-    //   // $('#projectDescription').val('');
-    // }
 });
 
 Template.searchprojectsettinguser.events({
@@ -100,6 +93,14 @@ Template.projectviewsettings.helpers({
   projectSettingSearchResults: function() {
     //  console.log("autosearch");
      return Session.get("projectSettingSearchResults");
+  },
+  projName: function() {
+    //  console.log("autosearch");
+     return Projects.findOne({_id:Session.get('selectedProject')}).title;
+  },
+  projDesc: function() {
+    //  console.log("autosearch");
+     return Projects.findOne({_id:Session.get('selectedProject')}).description;
   }
 });
 

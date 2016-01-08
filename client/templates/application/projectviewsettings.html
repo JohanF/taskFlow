@@ -9,11 +9,12 @@
                <div class="project-modal-body">
                        <div class="form-group" style="margin-bottom:7px">
                            <label for="Name">Project name:</label>
-                           <input name="Name" id="projectName" style="margin-right:10px"/>
+                           <input name="Name" id="projectName" style="margin-right:10px" value={{projName}}>
+
                        </div>
                        <div class="form-group">
                            <label for="Description">Project description:</label>
-                           <input name="Description" id="projectDescription" style="margin-right:10px"/>
+                           <input name="Description" id="projectDescription" style="margin-right:10px" value={{projDesc}}>
                        </div>
 
              					<label for="user-text" style="margin-top:0px">Project Users:</label>{{> projectUsers}}<br>

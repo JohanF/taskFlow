@@ -8,5 +8,9 @@ Meteor.methods({
 			creator: userId
  		});
 		Meteor.call("createTaskOrder", Projects.findOne({title: title})._id, '', '', '', '', '');
+	},
+	setProjectInfo: function(id, t, d) {
+		Projects.update(id, {$set: {title: t}});
+		Projects.update(id, {$set: {description: d}});
 	}
 });

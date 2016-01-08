@@ -9,9 +9,8 @@ Template.activeTasksList.helpers({
 
 
       for(var user in Projects.findOne({_id:projectData._id}).members){
-        console.log(Projects.findOne({_id:projectData._id}).members[user]);
+
         if(Projects.findOne({_id:projectData._id}).members[user] != Meteor.userId()){
-          console.log("hej");
           usrHiPrio.push({task: (Tasks.find({'assignedUsers.uid':Projects.findOne({_id:projectData._id}).members[user], project:projectData._id, _id:
        Tasks.find({'assignedUsers.uid':Projects.findOne({_id:projectData._id}).members[user], project:projectData._id}, {sort: {'assignedUsers.priority': 1}}
      ).fetch()[0]._id}, {sort: {'assignedUsers.priority': 1}}).fetch()[0]), user: Meteor.users.find({_id:Projects.findOne({_id:projectData._id}).members[user]}).fetch()[0].username});
